@@ -1,9 +1,11 @@
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1 class="text-4xl font-bold underline">React with TailwindCSS</h1>
+      <Toaster />
+      <h1>React with Bootstrap</h1>
     </div>
   );
 }
