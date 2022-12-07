@@ -12,7 +12,8 @@ function UploadPage() {
             formData.append('file', upload_file);
             try {
                 const request = await api.put(
-                    "/file/upload",
+                    //"/file/upload",
+                    "/cn/upload",
                     //`/s3/${upload_file.name}`,
                     formData
                 );
@@ -27,12 +28,13 @@ function UploadPage() {
 
     return (
         <div>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formUpload">
+            <Form onSubmit={handleSubmit} style={{"display":"flex"}}>
+                <Form.Group className="mb-3" controlId="fileToUpload">
                     <Form.Label>Upload de Arquivo</Form.Label>
-                    <input type="file" id="fileToUpload" />
-                    <Button type='submit'>Upload</Button>
+                    {/* <input type="file" id="fileToUpload" /> */}
+                    <Form.Control type="file"/>
                 </Form.Group>
+                <Button type='submit'>Upload</Button>
             </Form>
         </div>
     );
