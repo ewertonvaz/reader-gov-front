@@ -1,24 +1,20 @@
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
+import api from "../api/api.js";
 
 function UploadPage() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const fileInput = document.getElementById("filetoupload");
+        const fileInput = document.getElementById("fileToUpload");
         if (fileInput.files.length) {
             const upload_file = fileInput.files[0];
             const formData = new FormData();
             formData.append('file', upload_file);
             try {
-                const request = await axios.post(
-                    process.env.REACT_APP_FILE_SERVER || "http://localhost:8080/file/upload",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data"
-                        }
-                    }
+                const request = await api.put(
+                    "/file/upload",
+                    //`/s3/${upload_file.name}`,
+                    formData
                 );
                 console.log(request);
             } catch(e) {
@@ -31,10 +27,10 @@ function UploadPage() {
 
     return (
         <div>
-            <Form onSubmit={handleSubmit} encType="multipart/form-data">
+            <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formUpload">
                     <Form.Label>Upload de Arquivo</Form.Label>
-                    <input type="file" id="filetoupload" name="filetoupload" />
+                    <input type="file" id="fileToUpload" />
                     <Button type='submit'>Upload</Button>
                 </Form.Group>
             </Form>
