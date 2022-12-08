@@ -14,7 +14,7 @@ function UploadPage() {
                 const request = await api.put(
                     //"/file/upload",
                     "/cn/upload",
-                    //`/s3/${upload_file.name}`,
+                    //"/s3/upload"",
                     formData
                 );
                 console.log(request);
