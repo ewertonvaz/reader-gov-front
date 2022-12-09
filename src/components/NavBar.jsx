@@ -1,25 +1,64 @@
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/authContext";
+import logo from '../assets/logo.png'
+
 
 function NavBar() {
+
+  const { loggedInUser } = useContext(AuthContext);
+
   return (
-    <Navbar bg="dark" variant="dark">
+
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" >
       <Container>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <Navbar.Brand as="div">
-            <img
-              alt="logo da ironhack em cinza escuro e branco"
-              src="https://avatars.githubusercontent.com/u/4854004?s=280&v=4"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{" "}
-            Ironhack-Enap Turma 92
-          </Navbar.Brand>
-        </Link>
+        <Navbar.Brand href="/">
+          <img width={60} src={logo} alt="icone home" />
+          {' '}
+          Reader.GOV
+
+        </Navbar.Brand>
+      </Container>
+      <Container >
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className='justify-content-end' id="basic-navbar-nav"  >
+          <Nav className="me-auto">
+            {/* Se o usuário estiver logado */}
+            {loggedInUser && (
+              <>
+                <Link className="nav-link" to="/">
+                  Página inicial
+                </Link>
+                <Link className="nav-link" to="/profile">
+                  Perfil
+                </Link>
+                <Link className="nav-link" to="/tasks">
+                  Meus Documentos
+                </Link>
+              </>
+            )}
+            {/* Não está logado */}
+            {!loggedInUser && (
+              <>
+                <Link className="nav-link" to="/">
+                  Página inicial
+                </Link>
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+                <Link className="nav-link" to="/sign-up">
+                  Cadastre-se
+                </Link>
+              </>
+            )}
+          </Nav>
+
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
 export default NavBar;
+
