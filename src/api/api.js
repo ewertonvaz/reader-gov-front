@@ -5,7 +5,10 @@ const apiURLs = {
     production: "https://ecv-upload-server.cyclic.app"
 };
 
-const api = axios.create({ baseURL: apiURLs[process.env.NODE_ENV] });
+const api = axios.create({ 
+  baseURL: apiURLs[process.env.NODE_ENV] || apiURLs["development"],
+  //onUploadProgress: progressEvent => console.log(progressEvent.loaded) //callbak mostra o progresso do upload
+});
 
 
 api.interceptors.request.use((config) => {
