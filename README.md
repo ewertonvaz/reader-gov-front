@@ -28,7 +28,7 @@ Este projeto está disponível nos seguintes Links:
 
 **Deploy** : [https://]()
 
-**Git Hub** : [https://github.com/ewertonvaz/](https://github.com/ewertonvaz/docs-collection-92-front.git)
+**Git Hub** : [https://github.com/ewertonvaz/docs-collection-92-front.git](https://github.com/ewertonvaz/docs-collection-92-front.git)
 
 **Apresentação** : [https://](https://)
 
