@@ -11,6 +11,10 @@ body {
   height: 100%!important;
 }
 
+#root {
+  margin-top: 90px;
+}
+
 .footer {
   font-size: 9pt;
   margin-top: 50px;

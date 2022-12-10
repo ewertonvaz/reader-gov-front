@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiURLs = {
-    development: "http://localhost:8080",
-    production: "https://ecv-upload-server.cyclic.app"
+    development: "https://reader-gov-back.cyclic.app",
+    production: "https://reader-gov-back.cyclic.app"
 };
 
 const api = axios.create({ 

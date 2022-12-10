@@ -13,7 +13,7 @@ import UploadPage from './pages/UploadPage';
 import ErrorPage from "./pages/ErrorPage";
 import ProtectRoute from "./components/ProtectRoute";
 import Footer from './components/Footer';
-
+import ServerEnvPage from './pages/ServerEnvPage';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/sign-up" element={<SignUpPage />}></Route>
           <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />}/>
+          <Route path="/server-env" element={<ServerEnvPage Component={ProfilePage} />}/>
           <Route path="/upload" element={<UploadPage />}></Route>
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>

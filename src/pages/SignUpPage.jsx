@@ -29,13 +29,13 @@ function SignUpPage() {
   async function handleUpload(e) {
     try {
       const uploadData = new FormData();
-      uploadData.append("picture", img)
+      uploadData.append("file", img)
 
-      const response = await api.post("/uploadImage/upload", uploadData )
+      const response = await api.put("/cn/upload", uploadData )
 
       console.log(uploadData);
 
-      return response.data.url
+      return response.data.filename
     } catch (error) {
       console.log(error);
     }
