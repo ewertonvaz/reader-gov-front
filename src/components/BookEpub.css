@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,100;8..144,200;8..144,400&display=swap");
+
+.epub {
+  max-width: auto;
+  max-height: auto;
+  text-align: justify;
+  top: 1rem;
+  left: 0.5rem;
+  padding: 1em;
+  margin: 20px !important;
+  font-size: large;
+  color: rgb(9, 9, 9);
+  border: solid 1px black;
+  border-radius: 5px;
+  box-shadow: 9px 9px 8px -6px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  overflow: auto;
+  font-family: "Roboto Serif", serif !important;
+  font-weight: bolder;
+}

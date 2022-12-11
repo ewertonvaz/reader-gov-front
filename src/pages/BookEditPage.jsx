@@ -19,6 +19,7 @@ import { formatDateFromApi } from "../util/date.util";
 function EditarPage() {
   const { bookID } = useParams();
 
+  const [showUpload, setShowUpload ] = useState(false);
   const [book, setBook] = useState({});
   const [form, setForm] = useState({
     googleID: "",
@@ -73,6 +74,43 @@ function EditarPage() {
 
   // console.log(form);
 
+  function handleShowUpload(){
+    setShowUpload(!showUpload);
+    if (!showUpload) {
+
+    }
+  }
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+    if (fileInput.files.length) {
+        const upload_file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', upload_file);
+        try {
+            const request = await api.put("/cn/upload",formData);
+            //Obtem o nome do arquivo / URL
+            setForm({ ...form, caminho: request.data.filename });
+            fileInput.value = null;
+            toast.success("O upload do arquivo foi bem sucedido!")
+        } catch(e) {
+            setForm({ ...form, caminho:"" });
+            console.log(e);
+            toast.error("Não foi possível fazer o upload deste arquivo!")
+        }
+    } else {
+        console.log('You need to select a file');
+    }
+  }
+
+  function cancelUpload(e){
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+    fileInput.value = null;
+    setShowUpload(false);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const clone = { ...form };
@@ -119,6 +157,9 @@ function EditarPage() {
               <Link to={`/`} className="btn btn-secondary">
                 Voltar
               </Link>
+              <Button variant="secondary" onClick={handleShowUpload}>
+                Upload
+              </Button>
               <ConfirmaExclusao book={book} />
             </div>
           </Col>
@@ -316,7 +357,7 @@ function EditarPage() {
                   name="caminho"
                   value={form.caminho}
                   onChange={handleChange}
-                  placeholder="Insíra a URL do repositório do Livro"
+                  placeholder="Insira a URL do repositório do Livro"
                 />
               </FloatingLabel>
 
@@ -353,6 +394,16 @@ function EditarPage() {
                     style={{ height: "100px" }}
                   />
                 </FloatingLabel>
+                { showUpload &&
+                  <>
+                    <Form.Group className="mb-3" controlId="fileToUpload">
+                        <Form.Label>Upload de Arquivo</Form.Label>
+                        <Form.Control type="file"/>
+                    </Form.Group>
+                    <Button onClick={handleUpload}>Upload</Button>
+                    <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
+                  </>
+                }
               </div>
             </Form>
           </Col>

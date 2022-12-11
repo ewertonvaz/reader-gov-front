@@ -19,7 +19,7 @@ import BookDetailsPage from './pages/BookDetailsPage';
 import BookEditPage from './pages/BookEditPage';
 import BookNewPage from './pages/BookNewPage';
 import GoogleBooksPage from './pages/GoogleBooksPage';
-
+import Leitura from "./pages/Leitura";
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
             <Route path="/books/:bookID" element={<BookDetailsPage />}></Route>
             <Route path="/books/:bookID/edit" element={<BookEditPage />}></Route>
             <Route path="/books/google" element={<GoogleBooksPage />} />
+            <Route path="/books/leitura/:livroID" element={<Leitura />} />
 
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/sign-up" element={<SignUpPage />}></Route>
