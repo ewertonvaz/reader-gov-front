@@ -1,0 +1,23 @@
+.wrapper h1 {
+    font-size: 1.2rem;
+    font-weight: 800;
+ }
+
+ .wrapper h2 {
+    font-size: 1rem;
+    font-weight: 600;
+ }
+
+ .wrapper p {
+    font-size: 0.8rem;
+ }
+ 
+ .wrapper:hover {
+     cursor: pointer;
+ }
+ 
+ .wrapper img {
+     width: 120px;
+     height: 180px;
+     object-fit: cover;
+ }
