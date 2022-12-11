@@ -20,6 +20,7 @@ function LoginPage() {
   }
 
   async function handleSubmit(e) {
+    alert("Login confirmado")
     e.preventDefault();
     try {
       const response = await api.post("/user/login", form);
@@ -51,7 +52,7 @@ function LoginPage() {
       <div className="loginSide">
       <Container>
       <img src={logo} width="80" alt="logo"/>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group
             className="mb-3"
             controlId="formBasicEmail"
@@ -60,6 +61,7 @@ function LoginPage() {
             <Form.Control
               type="email"
               placeholder="Digite seu Email"
+              onChange={handleChange}
             />
             
           </Form.Group>
@@ -72,6 +74,7 @@ function LoginPage() {
             <Form.Control
               type="password"
               placeholder="Insira sua Senha"
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group
