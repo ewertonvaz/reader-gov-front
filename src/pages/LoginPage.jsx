@@ -3,7 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import { AuthContext } from "../contexts/authContext";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -20,11 +20,10 @@ function LoginPage() {
   }
 
   async function handleSubmit(e) {
-    alert("Login confirmado")
     e.preventDefault();
     try {
       const response = await api.post("/user/login", form);
-      
+
       //validar se o usuário confirmou o email dele
 
       //setItem -> coloca algo dentro do localStorage
@@ -48,54 +47,60 @@ function LoginPage() {
   }
 
   return (
-       <div className="loginContainer">
+    <div className="loginContainer">
       <div className="loginSide">
-      <Container>
-      <img src={logo} width="80" alt="logo"/>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicEmail"
-          >
-            <Form.Label><strong>Email</strong></Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Digite seu Email"
-              onChange={handleChange}
-            />
-            
-          </Form.Group>
+        <Container>
+          <img
+            src={logo}
+            width="80"
+            alt="logo"
+          />
+          <Form onSubmit={handleSubmit}>
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Label>
+                <strong>Email</strong>
+              </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Digite seu Email"
+                onChange={handleChange}
+              />
+            </Form.Group>
 
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicPassword"
-          >
-            <Form.Label><strong>Senha</strong></Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Insira sua Senha"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicCheckbox"
-          >
-            {/* <Form.Check
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicPassword"
+            >
+              <Form.Label>
+                <strong>Senha</strong>
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Insira sua Senha"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicCheckbox"
+            >
+              {/* <Form.Check
               type="checkbox"
               label="Check me out"
             /> */}
-          </Form.Group>
-           <Link to={"/"}>
-          <Button
-            size='lg'
-            variant="dark"
-            type="submit"
-          >
-            Entrar
-          </Button>
-          </Link> 
-        </Form>
+            </Form.Group>
+
+            <Button
+              size="lg"
+              variant="dark"
+              type="submit"
+            >
+              Entrar
+            </Button>
+          </Form>
         </Container>
       </div>
     </div>
