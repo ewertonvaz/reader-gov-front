@@ -65,6 +65,8 @@ function LoginPage() {
               </Form.Label>
               <Form.Control
                 type="email"
+                name="email"
+                value={form.email}
                 placeholder="Digite seu Email"
                 onChange={handleChange}
               />
@@ -79,6 +81,8 @@ function LoginPage() {
               </Form.Label>
               <Form.Control
                 type="password"
+                name="password"
+                value={form.password}
                 placeholder="Insira sua Senha"
                 onChange={handleChange}
               />
