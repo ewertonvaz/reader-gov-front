@@ -11,7 +11,7 @@ function NavBar() {
 
   return (
 
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" >
+    <Navbar className="nav" bg="dark" variant="dark" expand="lg" fixed="top" >
       <Container>
         <Navbar.Brand href="/">
           <img width={60} src={logo} alt="icone home" />

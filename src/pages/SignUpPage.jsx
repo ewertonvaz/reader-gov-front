@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 
@@ -64,12 +64,15 @@ function SignUpPage() {
   }
 
   return (
+    <div className="signUp-container">
     <Container
-      style={{ height: "100vh" }}
+      // style={{ height: "100vh" }}
       className="d-flex flex-column align-items-center justify-content-center"
     >
+    <Card className="card-signUp">
+    <Card.Header style={{width: "100%", textAlign:"center", backgroundColor: "rgb(33,37,41)", color:"#c7c8c9"}} > <h4>Cadastro</h4> </Card.Header>
       <Form className="w-50" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" style={{padding: "10px 0"}}>
           <Form.Label>Nome completo</Form.Label>
           <Form.Control
             type="text"
@@ -130,7 +133,9 @@ function SignUpPage() {
         </Link>
         .
       </Form.Text>
+      </Card>
     </Container>
+    </div>
   );
 }
 
