@@ -14,13 +14,13 @@ body {
 
 #root {
   height: 100%!important;
-  margin-top: 90px;
+  margin-top: 70px;
 }
 
 .footer {
   font-size: 9pt;
   margin-top: 50px;
-  height: 20vh;
+
   padding: 5px;
 }
 
@@ -34,9 +34,7 @@ a {
   text-decoration: none;
   /* no underline */
 }
-.nav{
-  height: 13vh;
-}
+
 
 .search-bar {
   font-size: 1.2rem;
@@ -102,7 +100,7 @@ a {
 
 .loginContainer{
   background-image: url('./assets/image3.jpg');
-    height: 77vh;
+    height: 95vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -111,10 +109,11 @@ a {
     align-items: center;
     justify-content: space-around;
     flex-wrap: nowrap;
+   
 }
 
 .loginSide{
-  height: 90vh;
+  height: 95vh;
   width: 30vw;
   background-color: rgba(240, 240, 240, 0.5);
   position: absolute;
@@ -136,11 +135,14 @@ a {
   justify-content: center;
   align-items: center;
   padding-bottom: 10px;
+
+  flex-wrap: wrap;
+  
 }
 
 .signUp-container{
   background-image: url('./assets/white-background-images-for-website-white-wallpapers-hd-2014-onlybackground-image.jpg');
-    height: 77vh;
+    height: 95vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

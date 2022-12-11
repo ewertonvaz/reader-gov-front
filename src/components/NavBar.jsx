@@ -28,7 +28,7 @@ function NavBar() {
 
   return (
 
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+    <Navbar className="nav" bg="dark" variant="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand>
           <Link className="nav-link" to="/">
