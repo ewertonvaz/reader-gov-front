@@ -20,6 +20,7 @@ body {
 .footer {
   font-size: 9pt;
   margin-top: 50px;
+  height: 20vh;
   padding: 5px;
 }
 
@@ -33,6 +34,9 @@ a {
   text-decoration: none;
   /* no underline */
 }
+.nav{
+  height: 13vh;
+}
 
 .search-bar {
   font-size: 1.2rem;
@@ -44,7 +48,6 @@ a {
 }
 
 /* BOOKS */
-
 
 .livro-lista {
   display: flex;
@@ -97,4 +100,52 @@ a {
   min-height: 300px;
 }
 
-/* BOOKS - END */
+.loginContainer{
+  background-image: url('./assets/image3.jpg');
+    height: 77vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.loginSide{
+  height: 90vh;
+  width: 30vw;
+  background-color: rgba(240, 240, 240, 0.5);
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cadastro-container{
+  background-color: #323238;
+  height: 80vh;
+  width: 100vw;
+}
+.card-signUp{
+  width: 45vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.signUp-container{
+  background-image: url('./assets/white-background-images-for-website-white-wallpapers-hd-2014-onlybackground-image.jpg');
+    height: 77vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
