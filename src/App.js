@@ -14,24 +14,40 @@ import ErrorPage from "./pages/ErrorPage";
 import ProtectRoute from "./components/ProtectRoute";
 import Footer from './components/Footer';
 import ServerEnvPage from './pages/ServerEnvPage';
+import BooksPage from './pages/BooksPage';
+import BookDetailsPage from './pages/BookDetailsPage';
+import BookEditPage from './pages/BookEditPage';
+import BookNewPage from './pages/BookNewPage';
+import GoogleBooksPage from './pages/GoogleBooksPage';
+
 
 function App() {
   return (
-    <div className="App">
+    <div className="App d-flex flex-column h-100">
       <AuthContextComponent>
         <NavBar />
         <Toaster />
-        <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/sign-up" element={<SignUpPage />}></Route>
-          <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />}/>
-          <Route path="/server-env" element={<ServerEnvPage Component={ProfilePage} />}/>
-          <Route path="/upload" element={<UploadPage />}></Route>
-          <Route path="*" element={<ErrorPage />}></Route>
-        </Routes>
+
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/books" element={<BooksPage />}></Route>
+            <Route path="/books/new" element={<BookNewPage />}></Route>
+            <Route path="/books/:bookID" element={<BookDetailsPage />}></Route>
+            <Route path="/books/:bookID/edit" element={<BookEditPage />}></Route>
+            <Route path="/books/google" element={<GoogleBooksPage />} />
+
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/sign-up" element={<SignUpPage />}></Route>
+            <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
+            <Route path="/server-env" element={<ServerEnvPage Component={ProfilePage} />} />
+            <Route path="/upload" element={<UploadPage />}></Route>
+            <Route path="*" element={<ErrorPage />}></Route>
+          </Routes>
+        </div>
+        
       </AuthContextComponent>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

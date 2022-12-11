@@ -1,0 +1,27 @@
+.wrapper {
+    /* background-color: aquamarine; */
+}
+
+.wrapper h1 {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.wrapper h2 {
+    font-size: 1.0rem;
+    font-weight: 600;
+}
+
+.wrapper h3 {
+    font-size: 1.0rem;
+    font-weight: 600;
+}
+
+.wrapper p {
+    font-size: 0.8rem;
+    margin: 1px 0px;
+}
+
+.wrapper img {
+    width: 180px;
+}
