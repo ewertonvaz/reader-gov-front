@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,100;8..144,200;8..144,400&display=swap");
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.react-pdf__Page {
+  display: flex !important;
+  flex-direction: row;
+}
+.react-pdf__Page__canvas {
+  max-width: 550px;
+  max-height: 600px;
+  top: 1rem;
+  left: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  border: solid 1px black;
+  border-radius: 5px;
+  box-shadow: 9px 9px 8px -6px rgba(0, 0, 0, 0.75);
+  background-color: white;
+}
+.react-pdf__Page__textContent {
+  max-width: 550px;
+  max-height: 600px;
+  text-align: justify;
+  top: 1rem;
+  left: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: large;
+  color: rgb(9, 9, 9);
+  border: solid 1px black;
+  border-radius: 5px;
+  box-shadow: 9px 9px 8px -6px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  overflow: scroll;
+  font-family: "Roboto Serif", serif !important;
+  font-weight: bolder;
+}
+.textLayer {
+  color: rgb(9, 9, 9);
+  letter-spacing: normal;
+  font-family: "Roboto Serif", serif !important;
+  font-weight: bolder;
+}
+.textLayer > span {
+  color: rgb(15, 15, 15);
+  letter-spacing: normal;
+  font-family: "Roboto Serif", serif !important;
+}
+
+.presentation {
+  max-width: 500px;
+  max-height: 500px;
+  overflow: hidden;
+  font-family: "Roboto Serif", serif !important;
+}
+
+.react-pdf__Page__annotations {
+  max-width: 100px;
+  max-height: 100px;
+  top: 1rem;
+  left: 1rem;
+  right: 90%;
+  padding: 2rem;
+  display: none;
+  gap: 1rem;
+  color: aliceblue;
+  border-radius: 5px;
+  background: #83cad8;
+  font-family: "Roboto Serif", serif !important;
+}
+.buttonc > button {
+  color: rgb(9, 9, 9);
+  border: solid 1px black;
+  border-radius: 5px;
+  box-shadow: 9px 9px 8px -6px rgba(0, 0, 0, 0.75);
+  border-top: 1px solid gray;
+}
