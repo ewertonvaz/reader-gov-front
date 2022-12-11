@@ -153,4 +153,9 @@ a {
     align-items: center;
 }
 
+.userData{
+  display: flex;
+  
+}
+
 
