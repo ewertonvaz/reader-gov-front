@@ -143,6 +143,7 @@ a {
 .signUp-container{
   background-image: url('./assets/white-background-images-for-website-white-wallpapers-hd-2014-onlybackground-image.jpg');
     height: 95vh;
+    width: 100vw;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -151,3 +152,5 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+

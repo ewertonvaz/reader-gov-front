@@ -28,7 +28,7 @@ function App() {
         <NavBar />
         <Toaster />
 
-        <div className="container">
+        <div >
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/books" element={<BooksPage />}></Route>
