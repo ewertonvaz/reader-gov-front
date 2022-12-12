@@ -212,7 +212,7 @@ function DocumentsPage() {
                                     })}
                                 </div>
 
-                                <div className="mt-5 ">
+                                <div className="my-5 d-flex justify-content-center">
                                     {getPaginatorContent()}
                                 </div>
 
