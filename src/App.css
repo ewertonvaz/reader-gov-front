@@ -117,6 +117,7 @@ a {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    margin-top: -30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -157,6 +158,7 @@ a {
   background-image: url('./assets/white-background-images-for-website-white-wallpapers-hd-2014-onlybackground-image.jpg');
     height: 95vh;
     width: 100vw;
+    margin-top: -30px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -168,6 +170,7 @@ a {
 
 .userData{
   background-color: #eceff1;
+  margin-top: -30px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/authContext";
 import api from "../api/api";
 import image from "../assets/profile.jpeg";
 import EditUser from "../components/EditUser";
+import { formatDateBR, formatDateFromApi } from "../util/date.util";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -64,7 +65,8 @@ function ProfilePage() {
 
   return (
     <div className="userData">
-      <h2>{user.name}</h2>
+      <h2>{user.name}</h2> 
+      
       {!isLoading && (
         <Container>
         <Row>
@@ -95,11 +97,11 @@ function ProfilePage() {
 
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>Idade</Form.Label>
+              <Form.Label>Usuário desde:</Form.Label>
               <Form.Control
-                type="number"
-                name="age"
-                value={user.age}
+                type="text"
+                name="createdAt"
+                value={formatDateBR(user.createdAt)}
                 onChange={handleChange}
                 disabled
               />
@@ -116,7 +118,7 @@ function ProfilePage() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Situação</Form.Label>
-              {!isLoading && (
+              {user.role === "ADMIN" && (
                 <Form.Select
                   name="active"
                   disabled
@@ -127,47 +129,32 @@ function ProfilePage() {
                   <option value={false}>INATIVO</option>
                 </Form.Select>
               )}
+              {user.role === "USER" && (
+                <p>{user.active? "ATIVO" : "INATIVO"}</p>
+              )}
             </Form.Group>
             <Button variant="secondary">Editar</Button>{" "}
             <Button
               variant="danger"
               onClick={handleDeleteUser}
+              style={ user.role === "USER"? {display:"none"} : {display: "block"}}
             >
               Deletar
             </Button>{" "}
           </Col>
 
           <Col>
-            <Form.Group className="mb-3">
-              <Form.Label>Data de Nascimento</Form.Label>
-              <Form.Control
-                type="date"
-                disabled
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" style={ user.role === "USER"? {display:"none"} : {display: "block"}}>
               <Form.Label>Função</Form.Label>
               {!isLoading && (
                 <Form.Select
+                  
                   disabled
                   defaultValue={user.role}
                 >
                   <option value="ADMIN">ADMIN</option>
                   <option value="USER">USER</option>
                 </Form.Select>
-              )}
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Endereço</Form.Label>
-              {!isLoading && (
-                <Form.Control
-                  type="text"
-                  name="adress"
-                  value=""
-                  disabled
-                />
               )}
             </Form.Group>
           </Col>
