@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import { AuthContext } from "../contexts/authContext";
 import logo from "../assets/logo.png";
+import toast from 'react-hot-toast';
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const { setLoggedInUser } = useContext(AuthContext);
 
@@ -22,8 +24,9 @@ function LoginPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const response = await api.post("/user/login", form);
-
+      setIsLoading(false);
       //validar se o usuário confirmou o email dele
 
       //setItem -> coloca algo dentro do localStorage
@@ -38,11 +41,10 @@ function LoginPage() {
 
       navigate("/profile");
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
-      if (error.response.status === 401) {
-        alert("Por favor, ative seu email antes do login");
-        return;
-      }
+      const message = error.response.data.msg;
+      toast.error(message);
     }
   }
 
