@@ -5,6 +5,7 @@ import api from "../api/api.js";
 import { AuthContext } from "../contexts/authContext";
 import logo from "../assets/logo.png";
 import toast from 'react-hot-toast';
+import Spinner from "../components/shared/Spinner";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ function LoginPage() {
             width="80"
             alt="logo"
           />
+          { isLoading && <Spinner />}
           <Form onSubmit={handleSubmit}>
             <Form.Group
               className="mb-3"
