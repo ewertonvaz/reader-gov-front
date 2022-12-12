@@ -37,9 +37,9 @@ function App() {
           <Routes>
             {/* Estast rotas ficarão SEM a NavBar */}
             <Route path="/signup" element={<SignUpPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
             {/* Todas as rotas aqui dentro estão COM a NavBar */}
             <Route element={<> <NavBar /> <Outlet /> </>}>
+              <Route path="/login" element={<LoginPage />}></Route>
               <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
               <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>
               <Route path="/books/new" element={<ProtectRoute Component={BookNewPage} />}></Route>
