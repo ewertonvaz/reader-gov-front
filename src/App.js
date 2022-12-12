@@ -1,7 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 import { AuthContextComponent } from "./contexts/authContext";
 
 import NavBar from './components/NavBar';
@@ -30,33 +30,30 @@ function App() {
 
   return (
     <div className="App d-flex flex-column h-100">
-      <AuthContextComponent>
-        <NavBar />
+
         <Toaster />
 
-        <div >
+        <AuthContextComponent>
           <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-
-            <Route path="/books" element={<BooksPage />}></Route>
-            <Route path="/books/new" element={<BookNewPage />}></Route>
-            <Route path="/books/:bookID" element={<BookDetailsPage />}></Route>
-            <Route path="/books/:bookID/edit" element={<BookEditPage />}></Route>
-            <Route path="/books/google" element={<GoogleBooksPage />} />
-            <Route path="/books/leitura/:livroID" element={<Leitura />} />
-            
-            <Route path="/documents" element={<DocumentsPage />}></Route>
-
+            {/* Estast rotas ficarão SEM a NavBar */}
             <Route path="/signup" element={<SignUpPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
-            
-            <Route path="/server-env" element={<ServerEnvPage Component={ProfilePage} />} />
-            <Route path="/upload" element={<UploadPage />}></Route>
-            <Route path="*" element={<ErrorPage />}></Route>
+            {/* Todas as rotas aqui dentro estão COM a NavBar */}
+            <Route element={<> <NavBar /> <Outlet /> </>}>
+              <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
+              <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>
+              <Route path="/books/new" element={<ProtectRoute Component={BookNewPage} />}></Route>
+              <Route path="/books/:bookID" element={<ProtectRoute Component={BookDetailsPage} />}></Route>
+              <Route path="/books/:bookID/edit" element={<ProtectRoute Component={BookEditPage} />}></Route>
+              <Route path="/books/google" element={<ProtectRoute Component={GoogleBooksPage} />} />
+              <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />             
+              <Route path="/documents" element={<ProtectRoute Component={DocumentsPage} />}></Route>
+              <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
+              <Route path="/server-env" element={<ProtectRoute Component={ServerEnvPage} />} />
+              <Route path="/upload" element={<ProtectRoute Componente={UploadPage} />}></Route>
+              <Route path="*" element={<ErrorPage />}></Route>
+            </Route>
           </Routes>
-        </div>
-        
       </AuthContextComponent>
       <Footer />
     </div>

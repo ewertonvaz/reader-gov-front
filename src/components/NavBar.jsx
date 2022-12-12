@@ -1,29 +1,37 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 import logo from '../assets/logo.png'
 
 
 function NavBar() {
+  const navigate = useNavigate();
+  let { loggedInUser, setLoggedInUser } = useContext(AuthContext);
 
-  let { loggedInUser } = useContext(AuthContext);
+  function signOut(e) {
+    e.preventDefault();
+    console.log("Fiz sign out");
+    localStorage.removeItem("loggedInUser");
+    setLoggedInUser(null);
+    navigate("/");
+  }
 
   // TODO: REMOVER QUANDO A AUTENTICAÇÃO ESTIVER FUNCIONANDO
-  loggedInUser = {
-    user: {
-      _id: "638fcb1da42461f2e82ef981",
-      name: "Bob Esponja",
-      email: "bob.esponja@gmail.com",
-      role: "USER",
-      active: true,
-      tasks: [],
-      createdAt: "2022-12-06T23:07:09.721Z",
-      updatedAt: "2022-12-06T23:07:09.721Z",
-      __v: 0
-    },
-    token: "token"
-  };
+  // loggedInUser = {
+  //   user: {
+  //     _id: "638fcb1da42461f2e82ef981",
+  //     name: "Bob Esponja",
+  //     email: "bob.esponja@gmail.com",
+  //     role: "USER",
+  //     active: true,
+  //     tasks: [],
+  //     createdAt: "2022-12-06T23:07:09.721Z",
+  //     updatedAt: "2022-12-06T23:07:09.721Z",
+  //     __v: 0
+  //   },
+  //   token: "token"
+  // };
 
 
   return (
@@ -68,7 +76,7 @@ function NavBar() {
 
                   <NavDropdown.Divider />
 
-                  <NavLink as={NavLink} to='/signout' className='dropdown-item'>Sair</NavLink>
+                  <NavLink as={NavLink} onClick={signOut} className='dropdown-item'>Sair</NavLink>
 
                 </NavDropdown>
               </>
@@ -84,8 +92,6 @@ function NavBar() {
                 </Link>
               </>
             )}
-
-
           </Nav>
         </Navbar.Collapse>
       </Container>
