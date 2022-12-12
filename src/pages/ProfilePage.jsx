@@ -6,9 +6,12 @@ import api from "../api/api";
 import image from "../assets/profile.jpeg";
 import EditUser from "../components/EditUser";
 import { formatDateBR, formatDateFromApi } from "../util/date.util";
+import Spinner from "../components/shared/Spinner";
+import { toast } from "react-hot-toast";
 
 function ProfilePage() {
   const navigate = useNavigate();
+  const [showUpload, setShowUpload ] = useState(false);
 
   const { setLoggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
@@ -38,8 +41,6 @@ function ProfilePage() {
 
     fetchUser();
   }, []);
-  console.log(user);
-  const { address } = user;
 
   function signOut() {
     localStorage.removeItem("loggedInUser");
@@ -63,10 +64,48 @@ function ProfilePage() {
     }
   }
 
+  function handleShowUpload(){
+    setShowUpload(!showUpload);
+    if (!showUpload) {
+
+    }
+  }
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+    if (fileInput.files.length) {
+        const upload_file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', upload_file);
+        try {
+            const request = await api.put("/cn/upload",formData);
+            //Obtem o nome do arquivo / URL
+            setUser({ ...user, profilePic: request.data.filename });
+            fileInput.value = null;
+            setShowUpload(!showUpload);
+            toast.success("O upload do arquivo foi bem sucedido!")
+        } catch(e) {
+            console.log(e);
+            toast.error("Não foi possível fazer o upload deste arquivo!")
+        }
+    } else {
+        console.log('You need to select a file');
+    }
+  }
+
+  function cancelUpload(e){
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+    fileInput.value = null;
+    setShowUpload(false);
+  }
+
   return (
     <div className="userData">
       <h2>{user.name}</h2> 
-      
+      {console.log(form)}
+      {isLoading && <Spinner />}
       {!isLoading && (
         <Container>
         <Row>
@@ -79,20 +118,20 @@ function ProfilePage() {
                 border: "1px solid #ddd",
                 borderRadius: "5px",
               }}
-              src={form.profilePic ? form.profilePic : image}
+              src={user.profilePic ? user.profilePic : image}
               alt="imagem"
             />
             
             <Form.Group className="mb-3">
-              <Form.Label>Editar Foto</Form.Label>
-              <Form.Control
-                type="file"
-                name="profilePic"
-                value={user.profilePic}
-                onChange={handleChange}
-                disabled
-              />
-            </Form.Group>
+              <Form.Label onClick={handleShowUpload} style={{cursor : "pointer"}}>Editar Foto</Form.Label>
+              { showUpload &&
+                  <>
+                  <Form.Control id="fileToUpload" type="file" className="mb-2"/>
+                  <Button onClick={handleUpload}>Upload</Button>
+                  <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
+                  </>
+                }            
+              </Form.Group>
           </Col>
 
           <Col>
