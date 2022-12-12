@@ -19,8 +19,7 @@ body {
 
 .footer {
   font-size: 9pt;
-  margin-top: 50px;
-
+  height: 15vh;
   padding: 5px;
 }
 
@@ -154,9 +153,13 @@ a {
 }
 
 .userData{
+  background-color: #eceff1;
   display: flex;
-  
-
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  gap: 80px;
 }
 
 
