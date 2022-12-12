@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 import logo from '../assets/logo.png'
@@ -28,7 +28,7 @@ function NavBar() {
 
   return (
 
-    <Navbar className="nav" bg="dark" variant="dark" expand="lg" fixed="top">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand>
           <Link className="nav-link" to="/">
@@ -63,17 +63,13 @@ function NavBar() {
             {loggedInUser && (
               <>
                 <NavDropdown title={loggedInUser.user.name} id="basic-nav-dropdown">
-                  <NavDropdown.Item>
-                    <Link to="/profile">
-                      Editar perfil
-                    </Link>
-                  </NavDropdown.Item>
+
+                  <NavLink as={NavLink} to='/profile' className='dropdown-item'>Editar Perfil</NavLink>
+
                   <NavDropdown.Divider />
-                  <NavDropdown.Item>
-                    <Link to="/signout">
-                      Sair
-                    </Link>
-                  </NavDropdown.Item>
+
+                  <NavLink as={NavLink} to='/signout' className='dropdown-item'>Sair</NavLink>
+
                 </NavDropdown>
               </>
             )}
@@ -83,7 +79,7 @@ function NavBar() {
                 <Link className="nav-link" to="/login">
                   Login
                 </Link>
-                <Link className="nav-link" to="/sign-up">
+                <Link className="nav-link" to="/signup">
                   Cadastre-se
                 </Link>
               </>
