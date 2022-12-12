@@ -65,7 +65,8 @@ function ProfilePage() {
   return (
     <div className="userData">
       <h2>{user.name}</h2>
-      <Container>
+      {!isLoading && (
+        <Container>
         <Row>
           <Col className="col-3">
             <img
@@ -79,12 +80,14 @@ function ProfilePage() {
               src={form.profilePic ? form.profilePic : image}
               alt="imagem"
             />
+            
             <Form.Group className="mb-3">
               <Form.Label>Editar Foto</Form.Label>
               <Form.Control
                 type="file"
                 name="profilePic"
                 value={user.profilePic}
+                onChange={handleChange}
                 disabled
               />
             </Form.Group>
@@ -170,6 +173,8 @@ function ProfilePage() {
           </Col>
         </Row>
       </Container>
+      )}
+      
     </div>
   );
 }
