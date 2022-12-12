@@ -1,23 +1,22 @@
-import api from "../api/api";
+import api from '../api/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ItemCard from "../components/ItemCard";
+import ItemCard from '../components/ItemCard';
 import Paginator from '../components/Paginator';
 import Spinner from '../components/shared/Spinner';
 
 
-const TIPOS_STATUS = {
-    LENDO: "Lendo",
-    LER: "Ler",
-    LIDO: "Lido"
+const DOC_TYPES = {
+    SEI: 'SEI',
+    DOU: 'DOU'
 };
 
 const PAGE_SIZE = 12;
 
 const defaultFilter = {
-    status: TIPOS_STATUS.LENDO,
+    docType: DOC_TYPES.DOU,
     startIndex: 0,
     currPage: 0,
     search: ''
@@ -37,7 +36,7 @@ const defaultPaginator = {
 };
 
 
-function BooksPage() {
+function DocumentsPage() {
 
     const [searchResult, setSearchResult] = useState(defaultSearchResult);
 
@@ -50,7 +49,7 @@ function BooksPage() {
 
     async function handleTabChange(e) {
 
-        setFilter({ ...filter, startIndex: 0, currPage: 0, status: e.target.dataset.status });
+        setFilter({ ...filter, startIndex: 0, currPage: 0, docType: e.target.dataset.doctype });
 
     }
 
@@ -99,10 +98,10 @@ function BooksPage() {
 
             setIsLoading(true);
 
-            // TODO: ajustar quando  o endpoint que faz os filtros estiver implementado no backend
+            // TODO: ajustar a rota para o endpoint que faz os filtros quando ele for implementado no backend
 
-            // const response = await api.get(`/books?status=${filter.status}&s=${filter.startIndex}&ps=${PAGE_SIZE}&q=${filter.search}`);
-            const response = await api.get(`/books/status/${filter.status}`);
+            // const response = await api.get(`/documents?dt=${currentTypeDoc}&s=${paginator.startIndex}&ps=${PAGE_SIZE}&q=${textToSearch}`);
+            const response = await api.get(`/documents/get-all?dt=${filter.docType}&s=${filter.startIndex}&ps=${PAGE_SIZE}&q=${filter.search}`);
 
             // TODO: ajustar quando a API for ajustada para retornar um objeto no padrão esperado (o objeto temporário result poderá ser removido e ser utilizado diretamente o response.data conforme linha comentada)
 
@@ -113,14 +112,13 @@ function BooksPage() {
                 items: response.data
             }
 
-
             // TODO: remover simulação busca e paginação quando o backend já retornar paginado
 
             if(filter.search) {
 
-                result.items = result.items.filter((livro) => {
+                result.items = result.items.filter((document) => {
 
-                    const textoLivro = `${livro.titulo}|${livro.subtitulo}|${livro.autor}|${livro.anotacoes}`.toLowerCase();
+                    const textoLivro = `${document.titulo}|${document.orgao}`.toLowerCase();
                 
                     return textoLivro.includes(filter.search.toLowerCase());
                 
@@ -132,7 +130,8 @@ function BooksPage() {
 
             result.items = result.items.slice(filter.startIndex, filter.startIndex + PAGE_SIZE);
 
-            
+
+
             setSearchResult(result);
 
             setPaginator({
@@ -150,6 +149,7 @@ function BooksPage() {
         fetchDocuments();
 
     }, [filter]);
+
 
 
     return (
@@ -171,9 +171,7 @@ function BooksPage() {
                     <div className="col">
                         <form className="form-inline">
                             <div className="text-end">
-                                <Link className="btn btn-outline-secondary btn-sm" to="/books/new">Novo livro
-                                </Link>
-                                <Link className="btn btn-outline-primary btn-sm ms-3" to="/books/google">Google Livros
+                                <Link className="btn btn-outline-secondary btn-sm" to="/books/new">Novo documento
                                 </Link>
                             </div>
                         </form>
@@ -183,22 +181,18 @@ function BooksPage() {
                 <div className="row pt-5">
                     <div className="col">
 
-                        <ul className="nav nav-tabs" id="tabStatus">
+                        <ul className="nav nav-tabs" id="tabDocType">
                             <li className="nav-item">
-                                <button className={`nav-link ${filter.status === TIPOS_STATUS.LENDO ? 'active fw-bold' : ''}`} id="tab-lendo" data-status={TIPOS_STATUS.LENDO} type="button" onClick={handleTabChange}>Lendo</button>
+                                <button className={`nav-link ${filter.docType === DOC_TYPES.SEI ? 'active fw-bold' : ''}`} id="tab-sei" data-doctype={DOC_TYPES.SEI} type="button" onClick={handleTabChange}>SEI</button>
                             </li>
                             <li className="nav-item">
-                                <button className={`nav-link ${filter.status === TIPOS_STATUS.LER ? 'active fw-bold' : ''}`} id="tab-ler" data-status={TIPOS_STATUS.LER} type="button" onClick={handleTabChange}>Quero ler</button>
+                                <button className={`nav-link ${filter.docType === DOC_TYPES.DOU ? 'active fw-bold' : ''}`} id="tab-dou" data-doctype={DOC_TYPES.DOU} type="button" onClick={handleTabChange}>DOU</button>
                             </li>
-                            <li className="nav-item">
-                                <button className={`nav-link ${filter.status === TIPOS_STATUS.LIDO ? 'active fw-bold' : ''}`} id="tab-lido" data-status={TIPOS_STATUS.LIDO} type="button" onClick={handleTabChange}>Lidos</button>
-                            </li>
-
                         </ul>
 
                         {isLoading && (
                             <div className='mt-5 d-flex justify-content-center'>
-                                <Spinner color="#3955BD" width="48px" />
+                                <Spinner color="#3955BD" width="48px"/>
                             </div>
                         )}
 
@@ -206,13 +200,13 @@ function BooksPage() {
 
                             <>
 
-                                <div className="mt-3 livro-lista">
-                                    {searchResult.items.map((livro) => {
+                                <div className="mt-3 document-list">
+                                    {searchResult.items.map((document) => {
                                         return (
-                                            <ItemCard key={livro._id} item={{
-                                                route: `/books/${livro._id}`,
-                                                image: livro.imagemCapa,
-                                                title: livro.titulo,
+                                            <ItemCard key={document._id} item={{
+                                                route: `/documents/${document._id}`,
+                                                image: document.imagem,
+                                                title: document.titulo,
                                             }} />
                                         );
                                     })}
@@ -234,4 +228,4 @@ function BooksPage() {
 
 }
 
-export default BooksPage;
+export default DocumentsPage;

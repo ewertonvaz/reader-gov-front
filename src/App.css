@@ -13,14 +13,13 @@ body {
 }
 
 #root {
-  height: 100%!important;
-  margin-top: 70px;
+  height: 100% !important;
+  margin-top: 90px;
 }
 
 .footer {
   font-size: 9pt;
   margin-top: 50px;
-
   padding: 5px;
 }
 
@@ -31,10 +30,8 @@ code {
 
 a {
   color: black;
-  text-decoration: none;
-  /* no underline */
+  text-decoration: none;  /* no underline */
 }
-
 
 .search-bar {
   font-size: 1.2rem;
@@ -45,15 +42,9 @@ a {
   border-radius: 15px;
 }
 
-/* BOOKS */
+/* ITEM CARD */
 
-.livro-lista {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-
-.livro-card {
+.item-card {
   width: 150px;
   height: 200px;
   text-align: center;
@@ -66,24 +57,45 @@ a {
 }
 
 
-.livro-card-imagem {
+.item-card-image {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 140px;
 }
 
-.livro-card-imagem img {
+.item-card-image img {
   max-height: 140px;
 }
 
-.livro-card-titulo {
+.item-card-title {
   border-top: 1px solid gray;
   padding-top: 6px;
   margin-top: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 8pt;
+}
+
+/* ITEM CARD - end*/
+
+
+/* DOCUMENT */
+
+.document-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+/* DOCUMENT - end*/
+
+
+/* BOOKS */
+
+.livro-lista {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .livro-detalhe-imagem{
