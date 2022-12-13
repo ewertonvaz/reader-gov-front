@@ -16,24 +16,23 @@ function ProfilePage() {
   const { setLoggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  
+  const [reload, setReload] = useState(false);
+  const [edit, setEdit] = useState(false)
   const [form, setForm] = useState({
     name: "",
     profilePic: "",
-    age: 0,
-    email: "",
+    email:"",
     role: "",
-    active: true,
-    birth: "",
+    active: "",
   });
-  const [reload, setReload] = useState(false);
-  const [edit, setEdit] = useState(false)
 
   useEffect(() => {
     async function fetchUser() {
       try {
         const response = await api.get("/user/profile");
         setUser(response.data);
-        setForm({ name: response.data.name });
+        setForm(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -42,6 +41,9 @@ function ProfilePage() {
 
     fetchUser();
   }, [reload]);
+
+  
+  
 
   function signOut() {
     localStorage.removeItem("loggedInUser");
@@ -111,15 +113,7 @@ function ProfilePage() {
     setEdit(false)
    
     try {
-      await api.post("/user/sign-up", form);
-      setForm(
-        {name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",}
-      )
-
-      navigate("/login");
+      await api.put("/user/edit", form);
     } catch (error) {
       console.log(error);
     }
@@ -174,7 +168,7 @@ function ProfilePage() {
               <Form.Control
                 type="text"
                 name="email"
-                value={user.email}
+                value={form.email}
                 onChange={handleChange}
                 disabled = {edit === true? false : true}
               />
