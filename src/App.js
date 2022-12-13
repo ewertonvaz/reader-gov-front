@@ -24,6 +24,7 @@ import DocumentsPage from './pages/DocumentsPage';
 import DocumentDetalhesPage from './pages/DocumentDetailsPage';
 import DocumentEditPage from './pages/DocumentEditPage';
 import DocumentNewPage from './pages/DocumentNewPage';
+import UserListPage from './pages/UserListPage';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
           <Route element={<> <NavBar /> <Outlet /> </>}>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
+            <Route path="/userlist" element={<ProtectRoute Component={UserListPage} />}></Route>
             <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>
             <Route path="/books/new" element={<ProtectRoute Component={BookNewPage} />}></Route>
 
