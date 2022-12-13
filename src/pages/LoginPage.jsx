@@ -36,11 +36,11 @@ function LoginPage() {
       //atualizar o contexto
       setLoggedInUser({ ...response.data });
 
-      /*  if (response.data.user.role === "ADMIN") {
-            navigate("/admin")
-        } */
-
-      navigate("/profile");
+      if(response.data.user.role === "ADMIN"){
+        navigate("/userlist");
+      } else {
+        navigate("/profile");
+      }
     } catch (error) {
       setIsLoading(false);
       console.log(error);
