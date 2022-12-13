@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "./../components/BookPdf.css";
 import pdf from "./../assets/pdfs/auto.pdf";
+import { Form } from "react-bootstrap";
 
 /*ESSA VARIÁVEL DE URL USA UM OUTRO LINK ANTES PARA
 EVITAR UM ERRO DE CORS */
@@ -68,9 +69,13 @@ function BookPdf({ id, caminho, ultPagLida }) {
             >
               Próxima
             </button>
+            <button>Anotações</button>
           </div>
         </div>
       </div>
+      <Form>
+        <Form.Text>Teste de posicionamento</Form.Text>
+      </Form>
     </>
   );
 }
