@@ -21,6 +21,9 @@ import BookNewPage from './pages/BookNewPage';
 import GoogleBooksPage from './pages/GoogleBooksPage';
 import Leitura from "./pages/Leitura";
 import DocumentsPage from './pages/DocumentsPage';
+import DocumentDetalhesPage from './pages/DocumentDetailsPage';
+import DocumentEditPage from './pages/DocumentEditPage';
+import DocumentNewPage from './pages/DocumentNewPage';
 
 function App() {
 
@@ -31,30 +34,40 @@ function App() {
   return (
     <div className="App d-flex flex-column h-100">
 
-        <Toaster />
+      <Toaster />
 
-        <AuthContextComponent>
-          <Routes>
-            {/* Estast rotas ficarão SEM a NavBar */}
-            <Route path="/signup" element={<SignUpPage />}></Route>
-            {/* Todas as rotas aqui dentro estão COM a NavBar */}
-            <Route element={<> <NavBar /> <Outlet /> </>}>
-              <Route path="/login" element={<LoginPage />}></Route>
-              <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
-              <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>
-              <Route path="/books/new" element={<ProtectRoute Component={BookNewPage} />}></Route>
-              <Route path="/books/:bookID" element={<ProtectRoute Component={BookDetailsPage} />}></Route>
-              <Route path="/books/:bookID/edit" element={<ProtectRoute Component={BookEditPage} />}></Route>
-              <Route path="/books/google" element={<ProtectRoute Component={GoogleBooksPage} />} />
-              <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />             
-              <Route path="/documents" element={<ProtectRoute Component={DocumentsPage} />}></Route>
-              <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
-              <Route path="/server-env" element={<ProtectRoute Component={ServerEnvPage} />} />
-              <Route path="/upload" element={<ProtectRoute Componente={UploadPage} />}></Route>
-              <Route path="*" element={<ErrorPage />}></Route>
-            </Route>
-          </Routes>
+      <AuthContextComponent>
+        <Routes>
+
+          {/* Estast rotas ficarão SEM a NavBar */}
+          <Route path="/signup" element={<SignUpPage />}></Route>
+
+          {/* Todas as rotas aqui dentro estão COM a NavBar */}
+          <Route element={<> <NavBar /> <Outlet /> </>}>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
+            <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>
+            <Route path="/books/new" element={<ProtectRoute Component={BookNewPage} />}></Route>
+
+            <Route path="/books/:bookID" element={<ProtectRoute Component={BookDetailsPage} />}></Route>
+            <Route path="/books/:bookID/edit" element={<ProtectRoute Component={BookEditPage} />}></Route>
+            <Route path="/books/google" element={<ProtectRoute Component={GoogleBooksPage} />} />
+            <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />
+
+            <Route path="/documents" element={<ProtectRoute Component={DocumentsPage} />}></Route>
+            <Route path="/documents/new" element={<ProtectRoute Component={DocumentNewPage} />}></Route>
+            <Route path="/documents/:documentID" element={<ProtectRoute Component={DocumentDetalhesPage} />}></Route>
+            <Route path="/documents/:documentID/edit" element={<ProtectRoute Component={DocumentEditPage} />}></Route>
+            <Route path="/documents/leitura/:documentID" element={<ProtectRoute Component={Leitura} />}></Route>
+
+            <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
+            <Route path="/server-env" element={<ProtectRoute Component={ServerEnvPage} />} />
+            <Route path="/upload" element={<ProtectRoute Componente={UploadPage} />}></Route>
+            <Route path="*" element={<ErrorPage />}></Route>
+          </Route>
+        </Routes>
       </AuthContextComponent>
+
       <Footer />
     </div>
   );

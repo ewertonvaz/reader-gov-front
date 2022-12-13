@@ -2,17 +2,25 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 import { Navigate } from "react-router-dom";
 
-function ProtectRoute({ Component }) {
-    const { loggedInUser } = useContext(AuthContext);
+function ProtectRoute({ Component, hideContainer }) {
 
-    console.log(loggedInUser);
+    const { loggedInUser } = useContext(AuthContext);
 
     if (loggedInUser) {
 
-        return <Component />;
+        if (hideContainer) {
+            return <Component />;
+        }
+        else {
+            return (
+                <div className="container">
+                    <Component />
+                </div>
+            );
+        }
 
     } else {
-        
+
         return <Navigate to="/login" />;
     }
 }
