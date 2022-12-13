@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const apiURLs = {
-    development: "https://reader-gov-back.cyclic.app",
-    production: "https://reader-gov-back.cyclic.app"
+  //development: "http://localhost:8080",
+  development: "https://reader-gov-back.cyclic.app",
+  production: "https://reader-gov-back.cyclic.app"
 };
 
 const api = axios.create({ 
@@ -27,9 +28,11 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use(
-
-    response => response,
-
+    response => { 
+      // response.headers["access-control-allow-origin"] = "*";
+      // console.log(response);
+      return response;
+    },
     error => {
       if (error.response.status === 401) {
         localStorage.removeItem("loggedInUser");
