@@ -54,7 +54,7 @@ function App() {
             <Route path="/books/:bookID" element={<ProtectRoute Component={BookDetailsPage} />}></Route>
             <Route path="/books/:bookID/edit" element={<ProtectRoute Component={BookEditPage} />}></Route>
             <Route path="/books/google" element={<ProtectRoute Component={GoogleBooksPage} />} />
-            <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />
+            <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} hideContainer={true} />} />
 
             <Route path="/documents" element={<ProtectRoute Component={DocumentsPage} />}></Route>
             <Route path="/documents/new" element={<ProtectRoute Component={DocumentNewPage} />}></Route>
@@ -62,7 +62,7 @@ function App() {
             <Route path="/documents/:documentID/edit" element={<ProtectRoute Component={DocumentEditPage} />}></Route>
             <Route path="/documents/leitura/:documentID" element={<ProtectRoute Component={Leitura} />}></Route>
 
-            <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
+            <Route path="/profile" element={<ProtectRoute Component={ProfilePage} hideContainer={true}/>} />
             <Route path="/server-env" element={<ProtectRoute Component={ServerEnvPage} />} />
             <Route path="/upload" element={<ProtectRoute Componente={UploadPage} />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
