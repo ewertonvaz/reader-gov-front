@@ -79,3 +79,39 @@
   box-shadow: 9px 9px 8px -6px rgba(0, 0, 0, 0.75);
   border-top: 1px solid gray;
 }
+
+.note-card-wrapper {
+  box-shadow: 4px 4px 8px -6px rgba(0, 0, 0, 0.75);
+  max-width: 15rem;
+  max-height: 10rem;
+}
+
+.note-card-header{
+  padding: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.note-card-body{
+  overflow-y: auto;
+}
+
+.note-card-footer {
+  display: flex;
+  gap: 4px;
+  justify-content: space-between;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.note-card-footer span {
+  cursor: pointer;
+}
+
+.note-card-footer span:nth-of-type(1) {
+    cursor: default;
+}
