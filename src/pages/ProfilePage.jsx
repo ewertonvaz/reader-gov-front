@@ -26,6 +26,7 @@ function ProfilePage() {
     birth: "",
   });
   const [reload, setReload] = useState(false);
+  const [edit, setEdit] = useState(false)
 
   useEffect(() => {
     async function fetchUser() {
@@ -40,7 +41,7 @@ function ProfilePage() {
     }
 
     fetchUser();
-  }, []);
+  }, [reload]);
 
   function signOut() {
     localStorage.removeItem("loggedInUser");
@@ -101,6 +102,29 @@ function ProfilePage() {
     setShowUpload(false);
   }
 
+  function btnEdit(){
+    setEdit(true)
+  }
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    setEdit(false)
+   
+    try {
+      await api.post("/user/sign-up", form);
+      setForm(
+        {name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",}
+      )
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="userData" id="userData">
       <h2>{user.name}</h2> 
@@ -152,7 +176,7 @@ function ProfilePage() {
                 name="email"
                 value={user.email}
                 onChange={handleChange}
-                disabled
+                disabled = {edit === true? false : true}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -160,7 +184,7 @@ function ProfilePage() {
               {user.role === "ADMIN" && (
                 <Form.Select
                   name="active"
-                  disabled
+                  disabled = {edit === true? false : true}
                   onChange={handleChange}
                   defaultValue={user.active}
                 >
@@ -174,7 +198,8 @@ function ProfilePage() {
             </Form.Group>
 
             <div className="buttons">
-            <Button variant="secondary">Editar</Button>{" "}
+            <Button onClick={btnEdit} variant="secondary" style={ edit===true? {display:"none"}: {display:"block"}}>Editar</Button>{" "}
+            <Button onClick={handleSubmit} variant="secondary" style={ edit===true? {display:"block"}: {display:"none"}}>Salvar</Button>{" "}
             <Button
               variant="danger"
               onClick={handleDeleteUser}
@@ -192,7 +217,7 @@ function ProfilePage() {
               {!isLoading && (
                 <Form.Select
                   
-                  disabled
+                  disabled = {edit === true? false : true}
                   defaultValue={user.role}
                 >
                   <option value="ADMIN">ADMIN</option>
