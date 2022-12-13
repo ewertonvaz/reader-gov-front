@@ -207,7 +207,7 @@ function CadastroPage() {
 
 
 
-              <div>
+              <div className="dataLeitura">
                 <Form className="dataLeitura">
                   <Form.Group>
                     <FloatingLabel

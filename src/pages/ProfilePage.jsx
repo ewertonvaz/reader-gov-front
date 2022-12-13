@@ -102,7 +102,7 @@ function ProfilePage() {
   }
 
   return (
-    <div className="userData">
+    <div className="userData" id="userData">
       <h2>{user.name}</h2> 
       {console.log(form)}
       {isLoading && <Spinner />}
@@ -172,6 +172,8 @@ function ProfilePage() {
                 <p>{user.active? "ATIVO" : "INATIVO"}</p>
               )}
             </Form.Group>
+
+            <div className="buttons">
             <Button variant="secondary">Editar</Button>{" "}
             <Button
               variant="danger"
@@ -180,6 +182,8 @@ function ProfilePage() {
             >
               Deletar
             </Button>{" "}
+            </div>
+          
           </Col>
 
           <Col>
