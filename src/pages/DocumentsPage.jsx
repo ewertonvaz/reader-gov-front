@@ -9,8 +9,8 @@ import Spinner from '../components/shared/Spinner';
 
 
 const DOC_TYPES = {
-    SEI: 'SEI',
-    DOU: 'DOU'
+    SEI: 'sei',
+    DOU: 'dou'
 };
 
 const PAGE_SIZE = 12;
@@ -101,7 +101,11 @@ function DocumentsPage() {
             // TODO: ajustar a rota para o endpoint que faz os filtros quando ele for implementado no backend
 
             // const response = await api.get(`/documents?dt=${currentTypeDoc}&s=${paginator.startIndex}&ps=${PAGE_SIZE}&q=${textToSearch}`);
-            const response = await api.get(`/documents/get-all?dt=${filter.docType}&s=${filter.startIndex}&ps=${PAGE_SIZE}&q=${filter.search}`);
+            
+            // const response = await api.get(`/documents/get-all?dt=${filter.docType}&s=${filter.startIndex}&ps=${PAGE_SIZE}&q=${filter.search}`);
+            
+            const response = await api.get(`/documents/get-all`);
+            
 
             // TODO: ajustar quando a API for ajustada para retornar um objeto no padrão esperado (o objeto temporário result poderá ser removido e ser utilizado diretamente o response.data conforme linha comentada)
 
@@ -171,7 +175,7 @@ function DocumentsPage() {
                     <div className="col">
                         <form className="form-inline">
                             <div className="text-end">
-                                <Link className="btn btn-outline-secondary btn-sm" to="/books/new">Novo documento
+                                <Link className="btn btn-outline-secondary btn-sm" to="/documents/new">Novo documento
                                 </Link>
                             </div>
                         </form>

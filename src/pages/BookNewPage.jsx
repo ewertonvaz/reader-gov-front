@@ -65,7 +65,7 @@ function CadastroPage() {
 
       toast.success("Cadastro concluído com sucesso!!");
 
-      console.log(livro);
+      // console.log(livro);
 
       navigate(`/books/${livro.data._id}`)
 
@@ -74,7 +74,7 @@ function CadastroPage() {
       toast.error("o Cadastro não pode ser concluído");
     }
   }
-  console.log(form);
+  // console.log(form);
 
   return (
     <div>

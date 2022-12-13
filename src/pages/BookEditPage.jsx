@@ -19,8 +19,8 @@ import { formatDateFromApi } from "../util/date.util";
 function EditarPage() {
   const { bookID } = useParams();
 
-  const [showUpload, setShowUpload ] = useState(false);
-  const [book, setBook] = useState({});
+  const [showUpload, setShowUpload] = useState(false);
+
   const [form, setForm] = useState({
     googleID: "",
     autor: "",
@@ -57,7 +57,6 @@ function EditarPage() {
           bookData.dataConclusao = formatDateFromApi(dataConclusao);
         }
         //
-        setBook(bookData);
         setForm(bookData);
         setIsLoading(false);
       } catch (error) {
@@ -74,7 +73,7 @@ function EditarPage() {
 
   // console.log(form);
 
-  function handleShowUpload(){
+  function handleShowUpload() {
     setShowUpload(!showUpload);
     if (!showUpload) {
 
@@ -85,26 +84,26 @@ function EditarPage() {
     e.preventDefault();
     const fileInput = document.getElementById("fileToUpload");
     if (fileInput.files.length) {
-        const upload_file = fileInput.files[0];
-        const formData = new FormData();
-        formData.append('file', upload_file);
-        try {
-            const request = await api.put("/cn/upload",formData);
-            //Obtem o nome do arquivo / URL
-            setForm({ ...form, caminho: request.data.filename });
-            fileInput.value = null;
-            toast.success("O upload do arquivo foi bem sucedido!")
-        } catch(e) {
-            setForm({ ...form, caminho:"" });
-            console.log(e);
-            toast.error("Não foi possível fazer o upload deste arquivo!")
-        }
+      const upload_file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('file', upload_file);
+      try {
+        const request = await api.put("/cn/upload", formData);
+        //Obtem o nome do arquivo / URL
+        setForm({ ...form, caminho: request.data.filename });
+        fileInput.value = null;
+        toast.success("O upload do arquivo foi bem sucedido!")
+      } catch (e) {
+        setForm({ ...form, caminho: "" });
+        console.log(e);
+        toast.error("Não foi possível fazer o upload deste arquivo!")
+      }
     } else {
-        console.log('You need to select a file');
+      console.log('You need to select a file');
     }
   }
 
-  function cancelUpload(e){
+  function cancelUpload(e) {
     e.preventDefault();
     const fileInput = document.getElementById("fileToUpload");
     fileInput.value = null;
@@ -130,7 +129,7 @@ function EditarPage() {
 
   return (
     <div>
-      <h1 style={{ textAlign: "start" }}>Editar Livro</h1>
+      <h2 style={{ textAlign: "start" }}>Editar Livro</h2>
       <Container>
         <Row>
           <Col className="col-3">
@@ -154,13 +153,20 @@ function EditarPage() {
               >
                 Salvar
               </Button>{" "}
-              <Link to={`/`} className="btn btn-secondary">
+              <Link to={`/books`} className="btn btn-secondary">
                 Voltar
               </Link>
               <Button variant="secondary" onClick={handleShowUpload}>
                 Upload
               </Button>
-              <ConfirmaExclusao book={book} />
+              <ConfirmaExclusao config={{
+                apiDeleteRoute: '/books/' + bookID,
+                successMessage: 'Livro excluído com sucesso!',
+                erroMessage: 'O Livro não pôde ser excluído da Biblioteca',
+                routeToNavigate: '/books',
+                modalTitle: 'Excluir Livro',
+                modalBody: 'Deseja excluir este livro de sua Biblioteca?',
+              }} />
             </div>
           </Col>
 
@@ -394,11 +400,11 @@ function EditarPage() {
                     style={{ height: "100px" }}
                   />
                 </FloatingLabel>
-                { showUpload &&
+                {showUpload &&
                   <>
                     <Form.Group className="mb-3" controlId="fileToUpload">
-                        <Form.Label>Upload de Arquivo</Form.Label>
-                        <Form.Control type="file"/>
+                      <Form.Label>Upload de Arquivo</Form.Label>
+                      <Form.Control type="file" />
                     </Form.Group>
                     <Button onClick={handleUpload}>Upload</Button>
                     <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>

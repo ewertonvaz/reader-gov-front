@@ -1,15 +1,11 @@
 import api from "../api/api";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useParams } from "react-router-dom";
-import {useState} from 'react'
+import { useState } from 'react'
 import toast from "react-hot-toast";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function ConfirmaExclusao({book}) {
-
-  const clone = {...book}  
-  const { bookID } = useParams();
+function ConfirmaExclusao({ config }) {
 
   const [show, setShow] = useState(false);
 
@@ -19,30 +15,32 @@ function ConfirmaExclusao({book}) {
   const navigate = useNavigate()
 
   async function handleDelete(e) {
-     delete clone._id   
+    
     try {
-      await api.delete('/books/' + bookID);
+      await api.delete(config.apiDeleteRoute);
 
-      toast.success("Livro excluído com sucesso!");
+      toast.success(config.successMessage);
       handleClose()
-      navigate("/books")
+      navigate(config.routeToNavigate)
     } catch (error) {
       console.log(error);
-      toast.error("O Livro não pode ser excluído da Biblioteca");
+      toast.error(config.errorMessage);
     }
   }
 
   return (
     <div>
-      <Button variant="danger" onClick={handleShow}>
+      <Button variant="danger"
+        size="sm"
+        onClick={handleShow}>
         Excluir
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Excluir Livro</Modal.Title>
+          <Modal.Title>{config.modalTitle}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Deseja excluir este livro de sua Biblioteca? </Modal.Body>
+        <Modal.Body>{config.modalBody}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancelar

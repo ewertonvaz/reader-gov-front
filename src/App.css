@@ -85,6 +85,17 @@ a {
   flex-wrap: wrap;
 }
 
+.document-detalhe-imagem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.document-detalhe-imagem img {
+  max-height: 200px;
+  min-height: 200px;
+}
 
 /* DOCUMENT - end*/
 
