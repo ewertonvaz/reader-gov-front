@@ -25,6 +25,8 @@ import DocumentDetalhesPage from './pages/DocumentDetailsPage';
 import DocumentEditPage from './pages/DocumentEditPage';
 import DocumentNewPage from './pages/DocumentNewPage';
 import UserListPage from './pages/UserListPage';
+import EditUserByAdminPage from './pages/EditUserByAdminPage';
+import SeiLoginPage from './pages/SeiLoginPage';
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
           {/* Todas as rotas aqui dentro estão COM a NavBar */}
           <Route element={<> <NavBar /> <Outlet /> </>}>
             <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/edit-user" element={<ProtectRoute Component={EditUserByAdminPage}/>}/>
+            <Route path="/login-sei" element={<SeiLoginPage/>}/>
             <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
             <Route path="/userlist" element={<ProtectRoute Component={UserListPage} />}></Route>
             <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>

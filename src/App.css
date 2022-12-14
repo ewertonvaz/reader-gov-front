@@ -203,3 +203,42 @@ a {
 }
 
 
+#nav-sei{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color:#fff;
+}
+
+.navbar-expand {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.body-sei{
+  background-color: #eceff1;
+  height: 95vh;
+    width: 100vw;
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-sei{
+  width: 30vw;
+  min-height: 70vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-sei{
+  background-color: #155f9b;
+  color: #fff;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+}
