@@ -101,11 +101,11 @@ function DocumentsPage() {
             // TODO: ajustar a rota para o endpoint que faz os filtros quando ele for implementado no backend
 
             // const response = await api.get(`/documents?dt=${currentTypeDoc}&s=${paginator.startIndex}&ps=${PAGE_SIZE}&q=${textToSearch}`);
-            
+
             // const response = await api.get(`/documents/get-all?dt=${filter.docType}&s=${filter.startIndex}&ps=${PAGE_SIZE}&q=${filter.search}`);
-            
+
             const response = await api.get(`/documents/get-all`);
-            
+
 
             // TODO: ajustar quando a API for ajustada para retornar um objeto no padrão esperado (o objeto temporário result poderá ser removido e ser utilizado diretamente o response.data conforme linha comentada)
 
@@ -116,21 +116,36 @@ function DocumentsPage() {
                 items: response.data
             }
 
-            // TODO: remover simulação busca e paginação quando o backend já retornar paginado
 
-            if(filter.search) {
 
-                result.items = result.items.filter((document) => {
+            // TODO: remover simulacoes de filtro da aba, da busca e da paginação quando o backend já retornar paginado
 
-                    const textoLivro = `${document.titulo}|${document.orgao}`.toLowerCase();
-                
+
+            // TODO: Remover - simulacao do filtro da aba 
+
+            result.items = result.items.filter((doc) => doc.tipo === filter.docType);
+
+            result.total = result.items.length;
+
+
+
+            // TODO: Remover - simulacao do filtro da busca
+
+            if (filter.search) {
+
+                result.items = result.items.filter((doc) => {
+
+                    const textoLivro = `${doc.titulo}|${doc.orgao}`.toLowerCase();
+
                     return textoLivro.includes(filter.search.toLowerCase());
-                
+
                 });
 
                 result.total = result.items.length;
 
             }
+
+            // TODO: Remover simulacao da paginacao 
 
             result.items = result.items.slice(filter.startIndex, filter.startIndex + PAGE_SIZE);
 
@@ -158,7 +173,7 @@ function DocumentsPage() {
 
     return (
         <div>
-            <div className="px-4">
+            <div className="px-4 pt-3">
                 <div className="row justify-content-between">
 
                     <div className="col-4">
@@ -187,16 +202,16 @@ function DocumentsPage() {
 
                         <ul className="nav nav-tabs" id="tabDocType">
                             <li className="nav-item">
-                                <button className={`nav-link ${filter.docType === DOC_TYPES.SEI ? 'active fw-bold' : ''}`} id="tab-sei" data-doctype={DOC_TYPES.SEI} type="button" onClick={handleTabChange}>SEI</button>
+                                <button className={`nav-link ${filter.docType === DOC_TYPES.DOU ? 'active fw-bold' : ''}`} id="tab-dou" data-doctype={DOC_TYPES.DOU} type="button" onClick={handleTabChange}>DOU</button>
                             </li>
                             <li className="nav-item">
-                                <button className={`nav-link ${filter.docType === DOC_TYPES.DOU ? 'active fw-bold' : ''}`} id="tab-dou" data-doctype={DOC_TYPES.DOU} type="button" onClick={handleTabChange}>DOU</button>
+                                <button className={`nav-link ${filter.docType === DOC_TYPES.SEI ? 'active fw-bold' : ''}`} id="tab-sei" data-doctype={DOC_TYPES.SEI} type="button" onClick={handleTabChange}>SEI</button>
                             </li>
                         </ul>
 
                         {isLoading && (
                             <div className='mt-5 d-flex justify-content-center'>
-                                <Spinner color="#3955BD" width="48px"/>
+                                <Spinner color="#3955BD" width="48px" />
                             </div>
                         )}
 

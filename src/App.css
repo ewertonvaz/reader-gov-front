@@ -14,12 +14,12 @@ body {
 
 #root {
   height: 100% !important;
-  margin-top: 90px;
+  margin-top: 65px;
 }
 
 .footer {
   font-size: 9pt;
-  height: 130px;
+  min-height: 54px;
 }
 
 code {
@@ -29,7 +29,8 @@ code {
 
 a {
   color: black;
-  text-decoration: none;  /* no underline */
+  text-decoration: none;
+  /* no underline */
 }
 
 .search-bar {
@@ -86,7 +87,7 @@ a {
   flex-wrap: wrap;
 }
 
-.document-detalhe-imagem{
+.document-detalhe-imagem {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,7 +109,7 @@ a {
   flex-wrap: wrap;
 }
 
-.livro-detalhe-imagem{
+.livro-detalhe-imagem {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,39 +121,35 @@ a {
   min-height: 300px;
 }
 
-.loginContainer{
-  background-image: url('./assets/image3.jpg');
-    height: 95vh;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin-top: -30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-   
+/* BOOKS - end*/
+
+
+/* LOGIN */
+
+
+.login-container {
+  background-image: url('./assets/login-bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.loginSide{
-  height: 95vh;
-  width: 30vw;
+.login-side {
   background-color: rgba(240, 240, 240, 0.5);
-  position: absolute;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.cadastro-container{
+/* LOGIN - end */
+
+
+/* SIGNUP */
+
+.cadastro-container {
   background-color: #323238;
   height: 80vh;
   width: 100vw;
 }
-.card-signUp{
+
+.card-signUp {
   width: 45vw;
   display: flex;
   justify-content: center;
@@ -160,26 +157,27 @@ a {
   padding-bottom: 10px;
 
   flex-wrap: wrap;
-  
+
 }
 
-.signUp-container{
-  background-image: url('./assets/white-background-images-for-website-white-wallpapers-hd-2014-onlybackground-image.jpg');
-    height: 95vh;
-    width: 100vw;
-    margin-top: -30px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.signUp-container {
+  background-image: url('./assets/signup-bg.jpg');
+  height: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#userData{
+/* SIGNUP - end */
+
+#userData {
   background-color: #eceff1;
-  margin: -30px 0!important;
+  margin: -30px 0 !important;
   display: flex;
   padding-bottom: 30px;
   flex-direction: column;
@@ -189,14 +187,14 @@ a {
   gap: 80px;
 }
 
-.buttons{
+.buttons {
   display: flex;
   gap: 10px;
   justify-content: center;
   margin-top: 10px;
 }
 
-.dataLeitura{
+.dataLeitura {
   display: flex;
   justify-content: space-between;
   gap: 10px;

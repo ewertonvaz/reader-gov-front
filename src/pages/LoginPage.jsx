@@ -9,7 +9,7 @@ import Spinner from "../components/shared/Spinner";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setLoggedInUser } = useContext(AuthContext);
 
@@ -36,10 +36,10 @@ function LoginPage() {
       //atualizar o contexto
       setLoggedInUser({ ...response.data });
 
-      if(response.data.user.role === "ADMIN"){
+      if (response.data.user.role === "ADMIN") {
         navigate("/userlist");
       } else {
-        navigate("/profile");
+        navigate("/");
       }
     } catch (error) {
       setIsLoading(false);
@@ -50,68 +50,88 @@ function LoginPage() {
   }
 
   return (
-    <div className="loginContainer">
-      <div className="loginSide">
-        <Container>
-          <img
-            src={logo}
-            width="80"
-            alt="logo"
-          />
-          { isLoading && <Spinner />}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group
-              className="mb-3"
-              controlId="formBasicEmail"
-            >
-              <Form.Label>
-                <strong>Email</strong>
-              </Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={form.email}
-                placeholder="Digite seu Email"
-                onChange={handleChange}
-              />
-            </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formBasicPassword"
-            >
-              <Form.Label>
-                <strong>Senha</strong>
-              </Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={form.password}
-                placeholder="Insira sua Senha"
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="formBasicCheckbox"
-            >
-              {/* <Form.Check
+    <>
+      <div className="row h-100 m-0 justify-content-end login-container">
+
+        <div className="col-md-4 ps-md-0 d-flex login-side">
+
+          <div className="w-100 p-2 align-self-center">
+
+            <img
+              src={logo}
+              width="80"
+              alt="logo"
+            />
+
+            <Form onSubmit={handleSubmit}>
+              <Form.Group
+                className="mb-3"
+                controlId="formBasicEmail"
+              >
+                <Form.Label>
+                  <strong>Email</strong>
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  placeholder="Digite seu Email"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+
+              <Form.Group
+                className="mb-3"
+                controlId="formBasicPassword"
+              >
+                <Form.Label>
+                  <strong>Senha</strong>
+                </Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  value={form.password}
+                  placeholder="Insira sua Senha"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="formBasicCheckbox"
+              >
+                {/* <Form.Check
               type="checkbox"
               label="Check me out"
             /> */}
-            </Form.Group>
+              </Form.Group>
 
-            <Button
-              size="lg"
-              variant="dark"
-              type="submit"
-            >
-              Entrar
-            </Button>
-          </Form>
-        </Container>
+              <div className="row">
+                <div className="col d-flex ">
+
+                  <Button
+                    size="lg"
+                    variant="dark"
+                    type="submit"
+                  >
+                    Entrar
+                  </Button>
+                  <div className="ms-4 align-self-center" >
+                    {isLoading && <Spinner />}
+                  </div>
+
+                </div>
+              </div>
+
+            </Form>
+          </div>
+
+        </div>
+
       </div>
-    </div>
+
+
+    </>
   );
 }
 
