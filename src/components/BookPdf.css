@@ -82,7 +82,7 @@
 
 .note-card-wrapper {
   box-shadow: 4px 4px 8px -6px rgba(0, 0, 0, 0.75);
-  max-width: 15rem;
+  max-width: 16rem;
   max-height: 10rem;
 }
 
@@ -114,4 +114,8 @@
 
 .note-card-footer span:nth-of-type(1) {
     cursor: default;
+}
+
+.notes-app-clickable {
+  cursor: pointer;
 }

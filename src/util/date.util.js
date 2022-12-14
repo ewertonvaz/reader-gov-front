@@ -24,4 +24,18 @@ function formatDateBR(dateStr){
     return frmDate;
 }
 
-export { formatDateFromApi, formatDateBR }
+function formatLocaleBR(dateStr){
+    const utcDate = new Date(dateStr);
+    const localeDate = convertUTCDateToLocalDate(utcDate);
+    if (!(localeDate instanceof Date)) {
+        return null;
+    }
+    return localeDate.toLocaleDateString('pt-BR');
+}
+
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime() - date.getTimezoneOffset()*60*1000);
+    return newDate;   
+}
+
+export { formatDateFromApi, formatDateBR, formatLocaleBR}
