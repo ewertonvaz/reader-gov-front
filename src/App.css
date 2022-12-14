@@ -248,7 +248,7 @@ a {
   background-color: #eceff1;
   width: 38px;
   height: 38px;
-  border-radius: 5px;
+  border-radius: 5px 0px 0px 5px;
   display: flex;
   align-items: center;
   justify-content: center;
