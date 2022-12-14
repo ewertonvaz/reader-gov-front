@@ -9,7 +9,7 @@ function DocumentCadastroPage() {
 
   const navigate = useNavigate();
 
-  // const [showUpload, setShowUpload] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
 
   const defaultForm = {
     titulo: "",
@@ -32,34 +32,84 @@ function DocumentCadastroPage() {
 
     e.preventDefault();
 
-    if(!form.titulo) {
+    if (!form.titulo) {
       toast.error("Informe o título");
       return;
     }
 
-    if(!form.tipo) {
+    if (!form.tipo) {
       toast.error("Informe o tipo");
       return;
     }
 
-    if(!form.dataPublicacao) {
+    if (!form.dataPublicacao) {
       toast.error("Informe a data da publicação");
       return;
     }
 
     try {
 
-      const document = await api.post('/documents', form);
+      const doc = await api.post('/documents', form);
 
       toast.success("Cadastro concluído com sucesso!!");
 
-      navigate(`/documents/${document.data._id}`);
+      navigate(`/documents/${doc.data._id}`);
 
     } catch (error) {
       console.log(error);
       toast.error("o Cadastro não pode ser concluído");
     }
   }
+
+  //#region Upload
+
+  function handleShowUpload() {
+    setShowUpload(!showUpload);
+  }
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+
+    if (fileInput.files.length) {
+
+      const upload_file = fileInput.files[0];
+
+      const formData = new FormData();
+
+      formData.append('file', upload_file);
+
+      try {
+
+        const request = await api.put("/cn/upload", formData);
+
+        //Obtem o nome do arquivo / URL
+        setForm({ ...form, pdf: request.data.filename });
+
+        fileInput.value = null;
+
+        toast.success("O upload do arquivo foi bem sucedido!")
+
+      } catch (e) {
+        setForm({ ...form, pdf: "" });
+        console.log(e);
+        toast.error("Não foi possível fazer o upload deste arquivo!")
+      }
+
+    } else {
+      console.log('You need to select a file');
+      toast.error("Selecione um arquivo!")
+    }
+  }
+
+  function cancelUpload(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+    fileInput.value = null;
+    setShowUpload(false);
+  }
+
+  //#endregion Upload
 
   return (
     <div>
@@ -70,7 +120,7 @@ function DocumentCadastroPage() {
       <div className="row">
         <div className="col-3 p-3">
           <div className="text-center mt-2 mb-3 documento-detalhe-imagem">
-            <img className="img-fluid" src={form.imagem || coverPlaceHolder} alt={document.titulo} />
+            <img className="img-fluid" src={form.imagem || coverPlaceHolder} alt={form.titulo} />
           </div>
           <div className="d-flex justify-content-center">
             <Button
@@ -81,17 +131,18 @@ function DocumentCadastroPage() {
               Salvar
             </Button>{' '}
 
+            <Button
+              className="ms-1"
+              size="sm"
+              variant="secondary" onClick={handleShowUpload}>
+              Upload
+            </Button>{' '}
+
             <Link to={`/documents`}
               className="btn btn-secondary btn-sm ms-1"
             >
               Voltar
             </Link>{' '}
-
-            {/* <Button
-              size="sm"
-              variant="secondary" onClick={handleShowUpload}>
-              Upload
-            </Button>{' '} */}
 
           </div>
         </div>
@@ -148,6 +199,22 @@ function DocumentCadastroPage() {
                 </FloatingLabel>
               </div>
 
+              <div className="col-12">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="URL do PDF"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="text"
+                    name="pdf"
+                    value={form.pdf}
+                    onChange={handleChange}
+                    placeholder="URL do PDF"
+                  />
+                </FloatingLabel>
+              </div>
+
               <div className="col-md-6">
                 <FloatingLabel
                   controlId="floatingInput"
@@ -182,7 +249,7 @@ function DocumentCadastroPage() {
               </div>
 
               <div className="col-12">
-              <FloatingLabel
+                <FloatingLabel
                   controlId="floatingTextarea2"
                   label="Anotações"
                 >
@@ -197,18 +264,19 @@ function DocumentCadastroPage() {
                 </FloatingLabel>
               </div>
 
+              {showUpload &&
+                <div className="col-12 mt-3">
+                  <Form.Group className="mb-3" controlId="fileToUpload">
+                    <Form.Label>Upload de Arquivo</Form.Label>
+                    <Form.Control type="file" />
+                  </Form.Group>
+                  <Button onClick={handleUpload}>Upload</Button>
+                  <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
+                </div>
+              }
+
             </div>
 
-            {/* {showUpload &&
-              <>
-                <Form.Group className="mb-3" controlId="fileToUpload">
-                  <Form.Label>Upload de Arquivo</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
-                <Button onClick={handleUpload}>Upload</Button>
-                <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
-              </>
-            } */}
 
           </Form>
         </div>
@@ -220,51 +288,3 @@ function DocumentCadastroPage() {
 export default DocumentCadastroPage;
 
 
- // function handleShowUpload() {
-  //   setShowUpload(!showUpload);
-  //   if (!showUpload) {
-
-  //   }
-  // }
-
-  // async function handleUpload(e) {
-  //   e.preventDefault();
-  //   const fileInput = document.getElementById("fileToUpload");
-
-  //   if (fileInput.files.length) {
-
-  //     const upload_file = fileInput.files[0];
-
-  //     const formData = new FormData();
-
-  //     formData.append('file', upload_file);
-
-  //     try {
-
-  //       const request = await api.put("/cn/upload", formData);
-
-  //       //Obtem o nome do arquivo / URL
-  //       setForm({ ...form, caminho: request.data.filename });
-
-  //       fileInput.value = null;
-
-  //       toast.success("O upload do arquivo foi bem sucedido!")
-
-  //     } catch (e) {
-  //       setForm({ ...form, caminho: "" });
-  //       console.log(e);
-  //       toast.error("Não foi possível fazer o upload deste arquivo!")
-  //     }
-
-  //   } else {
-  //     console.log('You need to select a file');
-  //     toast.error("Selecione um arquivo!")
-  //   }
-  // }
-
-  // function cancelUpload(e) {
-  //   e.preventDefault();
-  //   const fileInput = document.getElementById("fileToUpload");
-  //   fileInput.value = null;
-  //   setShowUpload(false);
-  // }
