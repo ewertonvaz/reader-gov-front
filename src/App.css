@@ -226,12 +226,11 @@ a {
     align-items: center;
 }
 .card-sei{
-  width: 30vw;
-  min-height: 70vh;
+  width: 430px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   flex-wrap: wrap;
 }
 
@@ -242,6 +241,7 @@ a {
   width: 100%;
   height: 40px;
   border-radius: 5px;
+  margin-bottom: 40px;
 }
 
 .icon{
