@@ -78,7 +78,7 @@ function CadastroPage() {
 
   return (
     <div>
-      <h1 style={{ textAlign: "start" }}>Cadastrar Livro</h1>
+      <h3 style={{ textAlign: "start" }}>Cadastrar Livro</h3>
       <Container>
         <Row>
           <Col className="col-3">

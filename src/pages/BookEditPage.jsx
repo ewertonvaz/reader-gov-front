@@ -129,7 +129,7 @@ function EditarPage() {
 
   return (
     <div>
-      <h2 style={{ textAlign: "start" }}>Editar Livro</h2>
+      <h3 style={{ textAlign: "start" }}>Editar Livro</h3>
       <Container>
         <Row>
           <Col className="col-3">

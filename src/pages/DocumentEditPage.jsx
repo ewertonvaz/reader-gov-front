@@ -142,7 +142,7 @@ function DocumentEditarPage() {
   return (
     <div>
       <div className="row">
-        <h2>Editar Documento</h2>
+        <h3>Editar Documento</h3>
       </div>
 
       {!isLoading && (

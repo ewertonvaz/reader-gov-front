@@ -114,7 +114,7 @@ function DocumentCadastroPage() {
   return (
     <div>
       <div className="row">
-        <h2>Cadastrar Documento</h2>
+        <h3>Cadastrar Documento</h3>
       </div>
 
       <div className="row">
