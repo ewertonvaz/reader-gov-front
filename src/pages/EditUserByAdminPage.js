@@ -9,7 +9,7 @@ import { formatDateBR, formatDateFromApi } from "../util/date.util";
 import Spinner from "../components/shared/Spinner";
 import { toast } from "react-hot-toast";
 
-function ProfilePage() {
+function EditUserByAdmin() {
   const navigate = useNavigate();
   const [showUpload, setShowUpload ] = useState(false);
 
@@ -230,4 +230,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default EditUserByAdmin;

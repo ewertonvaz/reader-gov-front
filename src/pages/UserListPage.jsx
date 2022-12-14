@@ -1,6 +1,8 @@
 import { Table, Container, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import {Link} from 'react-router-dom'
 import api from "../api/api.js";
+import EditUser from "../components/EditUser.jsx";
 //import ModalCreateBook from "../components/ModalCreateBook";
 
 function UserListPage() {
@@ -21,9 +23,11 @@ function UserListPage() {
     fetchUsers();
   }, []);
 
+  
+
   return (
     <div>
-      <h1>DashBoard</h1>
+      <h1>Usuários</h1>
       {
         autorized ?
         <Container>
@@ -46,7 +50,9 @@ function UserListPage() {
                     <td>{user.role}</td>
                     <td>{user.active}</td>
                     <td>
-                      <Button variant="outline-secondary">Detalhes</Button>
+                    <Link to='/edit-user'><Button variant="outline-secondary">Detalhes</Button></Link>
+                      
+                      
                     </td>
                   </tr>
                 );

@@ -25,6 +25,8 @@ import DocumentDetalhesPage from './pages/DocumentDetailsPage';
 import DocumentEditPage from './pages/DocumentEditPage';
 import DocumentNewPage from './pages/DocumentNewPage';
 import UserListPage from './pages/UserListPage';
+import EditUserByAdminPage from './pages/EditUserByAdminPage';
+import SeiLoginPage from './pages/SeiLoginPage';
 
 function App() {
 
@@ -70,8 +72,6 @@ function App() {
               <Route path="/upload" element={<ProtectRoute Componente={UploadPage} />}></Route>
               <Route path="*" element={<ErrorPage />}></Route>
             </Route>
-
-
           </Route>
         </Routes>
       </AuthContextComponent>

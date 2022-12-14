@@ -199,3 +199,60 @@ a {
   justify-content: space-between;
   gap: 10px;
 }
+
+
+#nav-sei{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color:#fff;
+}
+
+.navbar-expand {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.body-sei{
+  background-color: #eceff1;
+  height: 95vh;
+    width: 100vw;
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-sei{
+  width: 430px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-sei{
+  background-color: #155f9b;
+  color: #fff;
+  border: none;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+
+.icon{
+  background-color: #eceff1;
+  width: 38px;
+  height: 38px;
+  border-radius: 5px 0px 0px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.select{
+  min-width: 84.5%;
+}
