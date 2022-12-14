@@ -240,5 +240,21 @@ a {
   color: #fff;
   border: none;
   width: 100%;
+  height: 40px;
   border-radius: 5px;
+}
+
+.icon{
+  background-color: #eceff1;
+  width: 38px;
+  height: 38px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.select{
+  min-width: 84.5%;
 }
