@@ -1,10 +1,11 @@
 import styles from './GoTopButtom.module.css';
 
-function GoTopButtom({color}) {
+function GoTopButtom({color, tagId}) {
     const currColor = color ? color : "currentColor";
+    const tagIdentfier = tagId ? tagId : "#top";
 
     function goTop(){
-        window.location.href = "#top";
+        window.location.href = tagIdentfier;
     }
 
     return ( 
