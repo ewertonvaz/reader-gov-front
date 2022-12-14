@@ -42,7 +42,7 @@ function DetalhesPage() {
   return (
     <div>
       <div className="row">
-        <h2>Detalhes do Livro</h2>
+        <h3>Detalhes do Livro</h3>
       </div>
       <div className="row">
         <div className="col-3 p-3">

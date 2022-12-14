@@ -36,7 +36,7 @@ function DocumentDetalhesPage() {
   return (
     <div>
       <div className="row">
-        <h2>Detalhes do Documento</h2>
+        <h3>Detalhes do Documento</h3>
       </div>
 
 
