@@ -154,7 +154,7 @@ function BooksPage() {
 
     return (
         <div>
-            <div className="px-4">
+            <div className="px-4 pt-3">
                 <div className="row justify-content-between">
 
                     <div className="col-4">

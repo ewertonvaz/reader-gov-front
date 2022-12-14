@@ -13,8 +13,6 @@ function DocumentEditarPage() {
 
   const [showUpload, setShowUpload] = useState(false);
 
-  const [document, setDocument] = useState({});
-
   const [form, setForm] = useState({
     titulo: "",
     orgao: "",
@@ -41,8 +39,6 @@ function DocumentEditarPage() {
 
         const documentData = { ...response.data };
 
-        setDocument(documentData);
-
         setForm(documentData);
 
         setIsLoading(false);
@@ -58,63 +54,6 @@ function DocumentEditarPage() {
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  function handleShowUpload() {
-
-    setShowUpload(!showUpload);
-
-    // TODO: implementar
-    if (!showUpload) {
-    }
-
-  }
-
-  async function handleUpload(e) {
-
-    e.preventDefault();
-
-    const fileInput = document.getElementById("fileToUpload");
-
-    if (fileInput.files.length) {
-
-      const upload_file = fileInput.files[0];
-
-      const formData = new FormData();
-
-      formData.append('file', upload_file);
-
-      try {
-
-        const request = await api.put("/cn/upload", formData);
-
-        //Obtem o nome do arquivo / URL
-        setForm({ ...form, caminho: request.data.filename });
-
-        fileInput.value = null;
-
-        toast.success("O upload do arquivo foi bem sucedido!")
-
-      } catch (e) {
-        setForm({ ...form, caminho: "" });
-        console.log(e);
-        toast.error("Não foi possível fazer o upload deste arquivo!")
-      }
-
-    } else {
-
-      console.log('You need to select a file');
-
-      toast.error("Selecione um arquivo!")
-
-    }
-  }
-
-  function cancelUpload(e) {
-    e.preventDefault();
-    const fileInput = document.getElementById("fileToUpload");
-    fileInput.value = null;
-    setShowUpload(false);
   }
 
   async function handleSubmit(e) {
@@ -149,6 +88,57 @@ function DocumentEditarPage() {
     }
   }
 
+  //#region Upload
+
+  function handleShowUpload() {
+    setShowUpload(!showUpload);
+  }
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+
+    if (fileInput.files.length) {
+
+      const upload_file = fileInput.files[0];
+
+      const formData = new FormData();
+
+      formData.append('file', upload_file);
+
+      try {
+
+        const request = await api.put("/cn/upload", formData);
+
+        //Obtem o nome do arquivo / URL
+        setForm({ ...form, pdf: request.data.filename });
+
+        fileInput.value = null;
+
+        toast.success("O upload do arquivo foi bem sucedido!")
+
+      } catch (e) {
+        setForm({ ...form, pdf: "" });
+        console.log(e);
+        toast.error("Não foi possível fazer o upload deste arquivo!")
+      }
+
+    } else {
+      console.log('You need to select a file');
+      toast.error("Selecione um arquivo!")
+    }
+  }
+
+  function cancelUpload(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileToUpload");
+    fileInput.value = null;
+    setShowUpload(false);
+  }
+
+  //#endregion Upload
+
+
   return (
     <div>
       <div className="row">
@@ -159,7 +149,7 @@ function DocumentEditarPage() {
         <div className="row">
           <div className="col-3 p-3">
             <div className="text-center mt-2 mb-3 documento-detalhe-imagem">
-              <img className="img-fluid" src={form.imagem || coverPlaceHolder} alt={document.titulo} />
+              <img className="img-fluid" src={form.imagem || coverPlaceHolder} alt={form.titulo} />
             </div>
             <div className="d-flex justify-content-around">
               <Button
@@ -170,26 +160,30 @@ function DocumentEditarPage() {
                 Salvar
               </Button>{' '}
 
-              <Link to={`/documents`}
-                className="btn btn-secondary btn-sm"
-              >
-                Voltar
-              </Link>{' '}
-
               <Button
+                className="ms-1"
                 size="sm"
                 variant="secondary" onClick={handleShowUpload}>
                 Upload
               </Button>{' '}
 
-              <ConfirmaExclusao config={{
-                apiDeleteRoute: '/documents/' + documentID,
-                successMessage: 'Documento excluído com sucesso!',
-                erroMessage: 'O Documento não pôde ser excluído da Biblioteca',
-                routeToNavigate: '/documents',
-                modalTitle: 'Excluir Documento',
-                modalBody: 'Deseja excluir este documento de sua Biblioteca?',
-              }} />
+              <Link to={`/documents`}
+                className="btn btn-secondary btn-sm ms-1"
+              >
+                Voltar
+              </Link>{' '}
+
+              <span className="ms-1">
+                <ConfirmaExclusao className="ms-1" config={{
+                  apiDeleteRoute: '/documents/' + documentID,
+                  successMessage: 'Documento excluído com sucesso!',
+                  erroMessage: 'O Documento não pôde ser excluído da Biblioteca',
+                  routeToNavigate: '/documents',
+                  modalTitle: 'Excluir Documento',
+                  modalBody: 'Deseja excluir este documento de sua Biblioteca?',
+                }} />
+              </span>
+
             </div>
           </div>
           <div className="col-8 p-3">
@@ -249,6 +243,22 @@ function DocumentEditarPage() {
                   </FloatingLabel>
                 </div>
 
+                <div className="col-12">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="URL do PDF"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      type="text"
+                      name="pdf"
+                      value={form.pdf}
+                      onChange={handleChange}
+                      placeholder="URL do PDF"
+                    />
+                  </FloatingLabel>
+                </div>
+
                 <div className="col-md-6">
 
                   <FloatingLabel
@@ -299,17 +309,20 @@ function DocumentEditarPage() {
                     />
                   </FloatingLabel>
                 </div>
+
+                {showUpload &&
+                  <div className="col-12 mt-3">
+                    <Form.Group className="mb-3" controlId="fileToUpload">
+                      <Form.Label>Upload de Arquivo</Form.Label>
+                      <Form.Control type="file" />
+                    </Form.Group>
+                    <Button onClick={handleUpload}>Upload</Button>
+                    <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
+                  </div>
+                }
+
+
               </div>
-              {showUpload &&
-                <>
-                  <Form.Group className="mb-3" controlId="fileToUpload">
-                    <Form.Label>Upload de Arquivo</Form.Label>
-                    <Form.Control type="file" />
-                  </Form.Group>
-                  <Button onClick={handleUpload}>Upload</Button>
-                  <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
-                </>
-              }
 
             </Form>
 

@@ -4,6 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import coverPlaceHolder from '../assets/book-cover-placeholder.png';
 import { formatDateBR } from '../util/date.util';
 
+const DOC_TYPES = {
+  sei: 'SEI',
+  dou: 'DOU',
+};
+
 function DocumentDetalhesPage() {
 
   const { documentID } = useParams();
@@ -39,7 +44,7 @@ function DocumentDetalhesPage() {
 
         <div className="row">
           <div className="col-3 p-3">
-            <div className="text-center mt-3 mb-5 livro-detalhe-imagem">
+            <div className="text-center mt-3 mb-5 document-detalhe-imagem">
               <img className="img-fluid" src={document.imagem || coverPlaceHolder} alt={document.titulo} />
             </div>
 
@@ -81,7 +86,14 @@ function DocumentDetalhesPage() {
             <div className="row mb-3">
               <div className="col">
                 <div className="fw-bold">Tipo:</div>
-                <p className="text-muted"> {document.tipo}</p>
+                <p className="text-muted"> {DOC_TYPES[document.tipo]}</p>
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <div className="col">
+                <div className="fw-bold">URL do PDF:</div>
+                <a href={document.pdf} target='_blank' rel="noreferrer">{document.pdf}</a>
               </div>
             </div>
 

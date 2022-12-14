@@ -11,28 +11,10 @@ function NavBar() {
 
   function signOut(e) {
     e.preventDefault();
-    console.log("Fiz sign out");
     localStorage.removeItem("loggedInUser");
     setLoggedInUser(null);
     navigate("/");
   }
-
-  // TODO: REMOVER QUANDO A AUTENTICAÇÃO ESTIVER FUNCIONANDO
-  // loggedInUser = {
-  //   user: {
-  //     _id: "638fcb1da42461f2e82ef981",
-  //     name: "Bob Esponja",
-  //     email: "bob.esponja@gmail.com",
-  //     role: "USER",
-  //     active: true,
-  //     tasks: [],
-  //     createdAt: "2022-12-06T23:07:09.721Z",
-  //     updatedAt: "2022-12-06T23:07:09.721Z",
-  //     __v: 0
-  //   },
-  //   token: "token"
-  // };
-
 
   return (
 
@@ -49,9 +31,6 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
 
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
             {/* Se o usuário estiver logado */}
             {loggedInUser && (
               <>
@@ -76,7 +55,7 @@ function NavBar() {
 
                   <NavDropdown.Divider />
 
-                  <NavLink as={NavLink} onClick={signOut} className='dropdown-item'>Sair</NavLink>
+                  <NavLink as={NavLink} to='/signout' onClick={signOut} className='dropdown-item'>Sair</NavLink>
 
                 </NavDropdown>
               </>
