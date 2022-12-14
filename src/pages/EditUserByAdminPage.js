@@ -1,5 +1,5 @@
 import { Button, Col, Container, Row, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../contexts/authContext";
 import api from "../api/api";
@@ -9,12 +9,12 @@ import { formatDateBR, formatDateFromApi } from "../util/date.util";
 import Spinner from "../components/shared/Spinner";
 import { toast } from "react-hot-toast";
 
-function EditUserByAdmin() {
+function EditUserByAdmin({user}) {
+  const {idUser} = useParams()
   const navigate = useNavigate();
   const [showUpload, setShowUpload ] = useState(false);
 
-  const { setLoggedInUser } = useContext(AuthContext);
-  const [user, setUser] = useState({});
+  // const { setLoggedInUser } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   
   const [reload, setReload] = useState(false);
@@ -30,9 +30,9 @@ function EditUserByAdmin() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get("/user/profile");
-        setUser(response.data);
-        setForm(response.data);
+        const response = await api.get(`/user/oneUser/${idUser}`);
+        console.log(response.data[0])
+        setForm(response.data[0]);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -45,27 +45,27 @@ function EditUserByAdmin() {
   
   
 
-  function signOut() {
-    localStorage.removeItem("loggedInUser");
+  // function signOut() {
+  //   localStorage.removeItem("loggedInUser");
 
-    setLoggedInUser(null);
+  //   setLoggedInUser(null);
 
-    navigate("/");
-  }
-
+  //   navigate("/");
+  // }
+console.log(form)
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function handleDeleteUser() {
-    try {
-      await api.delete("/user/delete");
-      signOut();
-    } catch (error) {
-      console.log(error);
-      alert("Algo deu errado no delete do user");
-    }
-  }
+  // async function handleDeleteUser() {
+  //   try {
+  //     await api.delete("/user/delete");
+  //     signOut();
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert("Algo deu errado no delete do user");
+  //   }
+  // }
 
   function handleShowUpload(){
     setShowUpload(!showUpload);
@@ -84,7 +84,7 @@ function EditUserByAdmin() {
         try {
             const request = await api.put("/cn/upload",formData);
             //Obtem o nome do arquivo / URL
-            setUser({ ...user, profilePic: request.data.filename });
+            // setUser({ ...user, profilePic: request.data.filename });
             fileInput.value = null;
             setShowUpload(!showUpload);
             toast.success("O upload do arquivo foi bem sucedido!")
@@ -117,14 +117,14 @@ function EditUserByAdmin() {
       toast.success("Alterações realizadas com sucesso")
     } catch (error) {
       console.log(error);
-      toast.error("Não foi possivel realizar as Alterações")
+      // toast.error("Não foi possivel realizar as Alterações")
     }
   }
 
   return (
     <div className="userData" id="userData">
-      <h2>{user.name}</h2> 
-      {console.log(form)}
+      {/* <h2>{user.name}</h2>  */}
+      
       {isLoading && <Spinner />}
       {!isLoading && (
         <Container>
@@ -138,7 +138,7 @@ function EditUserByAdmin() {
                 border: "1px solid #ddd",
                 borderRadius: "5px",
               }}
-              src={user.profilePic ? user.profilePic : image}
+              src={form.profilePic ? form.profilePic : image}
               alt="imagem"
             />
             
@@ -147,8 +147,10 @@ function EditUserByAdmin() {
               { showUpload &&
                   <>
                   <Form.Control id="fileToUpload" type="file" className="mb-2"/>
+                  <div className="buttons">
                   <Button onClick={handleUpload}>Upload</Button>
                   <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
+                  </div>
                   </>
                 }            
               </Form.Group>
@@ -160,7 +162,7 @@ function EditUserByAdmin() {
               <Form.Control
                 type="text"
                 name="createdAt"
-                value={formatDateBR(user.createdAt)}
+                value={formatDateBR(form.createdAt)}
                 onChange={handleChange}
                 disabled
               />
@@ -177,25 +179,30 @@ function EditUserByAdmin() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Situação</Form.Label>
-              {user.role === "ADMIN" && (
+              
                 <Form.Select
                   name="active"
                   disabled = {edit === true? false : true}
                   onChange={handleChange}
-                  defaultValue={user.active}
+                  defaultValue={form.active}
                 >
                   <option value={true}>ATIVO</option>
                   <option value={false}>INATIVO</option>
                 </Form.Select>
-              )}
-              {user.role === "USER" && (
-                <p>{user.active? "ATIVO" : "INATIVO"}</p>
-              )}
+              
+              
+                
+              
             </Form.Group>
-
             <div className="buttons">
             <Button onClick={btnEdit} variant="secondary" style={ edit===true? {display:"none"}: {display:"block"}}>Editar</Button>{" "}
             <Button onClick={handleSubmit} variant="secondary" style={ edit===true? {display:"block"}: {display:"none"}}>Salvar</Button>{" "}
+            <Link to="/userlist" className="btn btn-secondary">Voltar</Link>
+            </div>
+            
+            {/* <div className="buttons">
+            
+            
             <Button
               variant="danger"
               onClick={handleDeleteUser}
@@ -203,18 +210,18 @@ function EditUserByAdmin() {
             >
               Deletar
             </Button>{" "}
-            </div>
+            </div> */}
           
           </Col>
 
           <Col>
-            <Form.Group className="mb-3" style={ user.role === "USER"? {display:"none"} : {display: "block"}}>
+            <Form.Group className="mb-3">
               <Form.Label>Função</Form.Label>
               {!isLoading && (
                 <Form.Select
                   
                   disabled = {edit === true? false : true}
-                  defaultValue={user.role}
+                  defaultValue={form.role}
                 >
                   <option value="ADMIN">ADMIN</option>
                   <option value="USER">USER</option>

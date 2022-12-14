@@ -48,7 +48,7 @@ function App() {
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
             <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />
-            <Route path="/edit-user" element={<ProtectRoute Component={EditUserByAdminPage}/>}/>
+            <Route path="/edit-user/:idUser" element={<ProtectRoute Component={EditUserByAdminPage}/>}/>
             <Route path="/login-sei" element={<SeiLoginPage/>}/>
 
             {/* Todas as rotas aqui dentro estão COM container */}

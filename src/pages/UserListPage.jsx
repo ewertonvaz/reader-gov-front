@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import {Link} from 'react-router-dom'
 import api from "../api/api.js";
 import EditUser from "../components/EditUser.jsx";
+import EditUserByAdmin from "./EditUserByAdminPage.js";
+import {useNavigate} from 'react-router-dom'
 //import ModalCreateBook from "../components/ModalCreateBook";
 
 function UserListPage() {
   const [users, setUsers] = useState([]);
   const [autorized, setAutorized] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchUsers() {
@@ -23,7 +26,17 @@ function UserListPage() {
     fetchUsers();
   }, []);
 
-  
+  function passarUsuario(user){
+   
+    
+    return (
+      <EditUserByAdmin user={user}/>,
+      navigate('/edit-user')
+    )
+      
+    
+    
+  }
 
   return (
     <div>
@@ -50,7 +63,8 @@ function UserListPage() {
                     <td>{user.role}</td>
                     <td>{user.active}</td>
                     <td>
-                    <Link to='/edit-user'><Button variant="outline-secondary">Detalhes</Button></Link>
+                    <Link className="btn btn-outline-secondary" to={`/edit-user/${user._id}`}>Detalhes</Link>
+                    {/* <Button onClick={()=>passarUsuario(user)} variant="outline-secondary">Detalhes</Button> */}
                       
                       
                     </td>
