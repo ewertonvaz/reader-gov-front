@@ -74,10 +74,12 @@ function NoteModalForm({ id, show, setShow, reload, setReload, title, form, setF
                 name="texto"
                 value={form.texto}
                 onChange={handleChange}
+                style={{height:"100%"}}
                 />
             </FloatingLabel>
             </Col>
             <Col>
+            <Form.Label htmlFor="page"><strong>Página nº</strong></Form.Label>
             <Form.Control
               type="number"
               name="page"
