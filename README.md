@@ -26,20 +26,19 @@ Agradecimento especial a professora **Karen Okasaki** que, com suas aulas excele
 
 Este projeto está disponível nos seguintes Links:
 
-**Deploy** : [https://]()
+**Deploy** : [https://reader-gov.netlify.app/login](https://reader-gov.netlify.app)
 
-**Git Hub** : [https://github.com/ewertonvaz/docs-collection-92-front.git](https://github.com/ewertonvaz/docs-collection-92-front.git)
+**Git Hub** : [https://github.com/ewertonvaz/reader-gov-front.git](https://github.com/ewertonvaz/reader-gov-front.git)
 
 **Apresentação** : [https://](https://)
-
 
 ### React com Bootstrap, Router e Toaster
 
 Instalação
 
 ```
-git clone https://github.com/ewertonvaz/docs-collection-92-front.git
-cd docs-collection-92-front
+git clone https://github.com/ewertonvaz/reader-gov-front.git
+cd reader-gov-front
 npm install
 npm start
 
