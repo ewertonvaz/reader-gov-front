@@ -170,6 +170,7 @@ a {
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -223,7 +224,7 @@ a {
     align-items: center;
 }
 .card-sei{
-  width: 430px;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -255,3 +256,4 @@ a {
 .select{
   min-width: 84.5%;
 }
+
