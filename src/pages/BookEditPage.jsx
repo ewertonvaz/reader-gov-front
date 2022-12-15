@@ -129,7 +129,7 @@ function EditarPage() {
 
   return (
     <div>
-      <h3 style={{ textAlign: "start" }}>Editar Livro</h3>
+      <h3>Editar Livro</h3>
       <Container>
         <Row>
           <Col className="col-3">
@@ -141,24 +141,25 @@ function EditarPage() {
                 marginTop: "30px",
                 border: "1px solid #ddd",
                 borderRadius: "5px",
+
               }}
               src={form.imagemCapa ? form.imagemCapa : image}
               alt="capa do livro"
             />
 
-            <div className="buttons">
-              <Button
-                variant="secondary"
+            <div className="my-3">
+              <Button className="my-2"
+                variant="outline-success"
                 onClick={handleSubmit}
               >
                 Salvar
               </Button>{" "}
-              <Link to={`/books`} className="btn btn-secondary">
+              <Link to={`/books/${bookID}`} className="btn btn-outline-secondary">
                 Voltar
-              </Link>
-              <Button variant="secondary" onClick={handleShowUpload}>
+              </Link>{" "}
+              <Button variant="outline-secondary" onClick={handleShowUpload}>
                 Upload
-              </Button>
+              </Button>{" "}
               <ConfirmaExclusao config={{
                 apiDeleteRoute: '/books/' + bookID,
                 successMessage: 'Livro excluído com sucesso!',
@@ -389,7 +390,7 @@ function EditarPage() {
               <div className="mb-3">
                 <FloatingLabel
                   controlId="floatingTextarea2"
-                  label="Comentários"
+                  label="Observações"
                 >
                   <Form.Control
                     as="textarea"

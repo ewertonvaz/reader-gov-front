@@ -162,7 +162,6 @@ a {
 
 .signUp-container {
   background-image: url('./assets/signup-bg.jpg');
-  height: 100%;
   padding-top: 30px;
   padding-bottom: 30px;
   background-position: center;
@@ -189,9 +188,9 @@ a {
 
 .buttons {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .dataLeitura {
@@ -257,3 +256,7 @@ a {
   min-width: 84.5%;
 }
 
+.pdf-reader-container {
+  display: flex;
+  flex-wrap: wrap; 
+}

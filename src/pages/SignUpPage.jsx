@@ -96,7 +96,6 @@ function SignUpPage() {
                 <Form.Label>Nome completo</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Insira um nome para identificação"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
@@ -108,7 +107,6 @@ function SignUpPage() {
                 <Form.Label>Endereço de e-mail</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Insira o seu melhor endereço de e-mail"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
@@ -120,7 +118,6 @@ function SignUpPage() {
                 <Form.Label>Senha</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Insira uma senha válida"
                   name="password"
                   value={form.password}
                   onChange={handleChange}
@@ -133,7 +130,6 @@ function SignUpPage() {
                 <Form.Label>Confirmar senha</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Confirme a senha válida criada anteriormente"
                   name="confirmPassword"
                   value={form.confirmPassword}
                   onChange={handleChange}
@@ -150,7 +146,7 @@ function SignUpPage() {
 
             </Form>
             <Form.Text>
-              Já possui cadastro? Faça já o
+              Já possui cadastro? Faça o
               <Link className="text-warning fw-bold text-decoration-none" to="/login">
                 {" "}
                 login

@@ -30,8 +30,7 @@ function ConfirmaExclusao({ config }) {
 
   return (
     <div>
-      <Button variant="danger"
-        size="sm"
+      <Button variant="outline-danger"
         onClick={handleShow}>
         Excluir
       </Button>

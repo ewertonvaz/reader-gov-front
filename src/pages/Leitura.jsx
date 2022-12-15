@@ -1,35 +1,115 @@
-import BookPdf from "../components/BookPdf";
-// import BookEpub from "../components/BookEpub";
-//import { useState } from "react";
-import { useLocation  } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import api from "../api/api";
+import PdfReader from "../components/PdfReader";
+import Spinner from '../components/shared/Spinner';
 
 function Leitura() {
-  //const [showLeitor, setShowLeitor] = useState(false);
-  const parametro = useLocation();
-  const { livro } = parametro.state;
-  //console.log(livro.ultPagLida);
-  return (
-    <div className="livro-lista">
-      {livro.tipo.toLowerCase() === "pdf" && (
-        <BookPdf
-          tipo={livro.tipo}
-          ultPagLida={livro.ultPagLida}
-          caminho={livro.caminho}
-          id={livro._id}
-        />
-      )}
-      {livro.tipo.toLowerCase() === "epub" &&
-        ( <h2>Desculpe leitor de e-Pub indisponível temporariamente!</h2>)
-        // (
-        //   <BookEpub
-        //     tipo={livro.tipo}
-        //     ultPagLida={livro.ultPagLida}
-        //     caminho={livro.caminho}
-        //     id={livro._id}
-        //   />
-        // )
+
+  const { tipoConteudo, idConteudo } = useParams();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [config, setConfig] = useState({});
+
+  const [showInvalidFileType, setShowInvalidFileType] = useState(false);
+
+
+  useEffect(() => {
+
+    (async () => {
+
+      let configNew;
+
+      if (tipoConteudo === 'book') {
+
+        const res = await api.get('/books/' + idConteudo);
+
+        if (res.data.tipo.toLowerCase() !== 'pdf') {
+          setShowInvalidFileType(true);
+        }
+        else {
+
+          configNew = {
+            id: res.data._id,
+            urlArquivo: res.data.caminho,
+            ultPagLida: res.data.ultPagLida || 1,
+            tipoConteudoApiNotes: 'book'
+          };
+
+        }
+
+
       }
-    </div>
+      else if (tipoConteudo === 'document') {
+
+        const res = await api.get('/documents/get-one/' + idConteudo);
+
+        if (!res.data.pdf || res.data.pdf.substring(res.data.pdf.lastIndexOf('.')).toLowerCase() !== '.pdf') {
+          setShowInvalidFileType(true);
+        }
+        else {
+
+          configNew = {
+            id: res.data._id,
+            urlArquivo: res.data.pdf,
+            ultPagLida: 1,
+            tipoConteudoApiNotes: 'document'
+          };
+
+        }
+
+
+      }
+      else {
+        throw new Error('Tipo de conteúdo inválido');
+      }
+
+      setConfig(configNew);
+
+      setIsLoading(false);
+
+    })();
+
+
+
+  }, []);
+
+  return (
+
+    <>
+
+      {isLoading && (
+        <div className='mt-5 d-flex justify-content-center'>
+          <Spinner color="#3955BD" width="48px" />
+        </div>
+      )}
+
+
+      {!isLoading && !showInvalidFileType && (
+
+        <div className="pdf-reader-container">
+          <PdfReader
+            id={config.id}
+            urlArquivo={config.urlArquivo}
+            ultPagLida={config.ultPagLida}
+            tipoConteudoApiNotes={config.tipoConteudoApiNotes}
+          />
+        </div>
+
+      )}
+
+      {showInvalidFileType && (
+        <div className="container mt-5">
+          <div className="alert alert-warning" role="alert">
+          <h4 className="alert-heading">Não foi possível exibir o conteúdo</h4>
+            Tipo de arquivo inválido.
+          </div>
+        </div>
+      )}
+
+    </>
+
   );
 }
 
