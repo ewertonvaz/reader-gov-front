@@ -45,11 +45,16 @@ function Leitura() {
 
         const res = await api.get('/documents/get-one/' + idConteudo);
 
-        if (!res.data.pdf || res.data.pdf.substring(res.data.pdf.lastIndexOf('.')).toLowerCase() !== '.pdf') {
+        //if (!res.data.pdf || res.data.pdf.substring(res.data.pdf.lastIndexOf('.')).toLowerCase() !== '.pdf') {
+        if (
+          !res.data.pdf ||
+          (res.data.formato.toLowerCase() !== 'pdf' &&
+          res.data.pdf.substring(res.data.pdf.lastIndexOf('.')).toLowerCase() !== '.pdf')
+        ) {
+          console.log(res.data);
           setShowInvalidFileType(true);
         }
         else {
-
           configNew = {
             id: res.data._id,
             urlArquivo: res.data.pdf,
