@@ -77,8 +77,11 @@ function SignUpPage() {
           confirmPassword: "",
         }
       )
-
+      
+      toast.success("Cadastro realizado com sucesso.\n Verifique seu e-mail para ativar a conta!", {duration: 6000});
+      
       navigate("/login");
+      
     } catch (error) {
       toast.error(error.response.data.msg);
     }
