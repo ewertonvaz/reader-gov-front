@@ -8,7 +8,7 @@ O aplication **READER.GOV** foi criado como o projeto final do bootcamp Iron Hac
 
 ## DESCRIÇÃO DO PROJETO:
 
-O Reader.GOV é a continuação do projeto Books Collection, agora adaptado com funções mais específicas para o serviço público.  
+O Reader.GOV é a continuação do projeto Books Collection-92, agora adaptado com funções mais específicas para o serviço público.  
 Trata-se de uma aplicação para centralizar os documentos em um único local e facilitar o gerenciamento da leitura dos documentos públicos.
 
 ## Equipe
@@ -28,7 +28,9 @@ Este projeto está disponível nos seguintes Links:
 
 **Deploy** : [https://reader-gov.netlify.app/login](https://reader-gov.netlify.app)
 
-**Git Hub** : [https://github.com/ewertonvaz/reader-gov-front.git](https://github.com/ewertonvaz/reader-gov-front.git)
+**Git HubFront** : [https://github.com/ewertonvaz/reader-gov-front.git](https://github.com/ewertonvaz/reader-gov-front.git)
+
+**Git HubBack** : [https://github.com/ewertonvaz/reader-gov-back.git](https://github.com/ewertonvaz/reader-gov-back.git)
 
 **Apresentação** : [https://bit.ly/3FUC4ct](https://bit.ly/3FUC4ct)
 
