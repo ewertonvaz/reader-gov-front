@@ -105,14 +105,15 @@ function LoginPage() {
               label="Check me out"
             /> */}
               </Form.Group>
-
+              <small>Ainda não possui uma Conta? Faça já o seu <Link to='/signup' style={{textDecoration:"none", color:"black"}}><strong>Cadastro</strong></Link></small><br/>
               <div className="row">
                 <div className="col d-flex ">
-
+                
                   <Button
                     size="lg"
                     variant="dark"
                     type="submit"
+                    style={{marginTop:"10px"}}
                   >
                     Entrar
                   </Button>
