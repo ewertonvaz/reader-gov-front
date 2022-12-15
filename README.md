@@ -2,6 +2,8 @@
 
 ## Aplicativo para centralização e gerenciamento de leitura de documentos públicos
 
+![Tela inicial do aplicativo](/docs/images/home-page.png)
+
 ## PROJETO 3
 
 O aplication **READER.GOV** foi criado como o projeto final do bootcamp Iron Hack Web Development - Full time - ENAP / 2022 - Turma 92.
