@@ -13,7 +13,7 @@ function DocumentDetalhesPage() {
 
   const { documentID } = useParams();
 
-  const [document, setDocument] = useState({});
+  const [form, setForm] = useState({});
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,7 +24,7 @@ function DocumentDetalhesPage() {
 
       const documentApi = { ...response.data };
 
-      setDocument(documentApi);
+      setForm(documentApi);
 
       setIsLoading(false);
 
@@ -45,22 +45,22 @@ function DocumentDetalhesPage() {
         <div className="row">
           <div className="col-3 p-3">
             <div className="text-center mt-3 mb-5 document-detalhe-imagem">
-              <img className="img-fluid" src={document.imagem || coverPlaceHolder} alt={document.titulo} />
+              <img className="img-fluid" src={form.imagem || coverPlaceHolder} alt={form.titulo} />
             </div>
 
             <div className="text-center">
-              <Link to={`/documents/${document._id}/edit`} className="btn btn-secondary">
+              <Link to={`/documents/${form._id}/edit`} className="btn btn-outline-secondary">
                 Editar
               </Link>
               <Link
-                state={{ document }}
-                to={`/documents/leitura/${document._id}`}
-                className={`btn btn-secondary ms-1 ${document.pdf ? '' : 'disabled'}`}
+                state={{form }}
+                to={`/leitura/document/${form._id}`}
+                className={`btn btn-outline-secondary ms-1 ${form.pdf ? '' : 'disabled'}`}
               >
                 Ler
               </Link>
 
-              <Link to={`/documents`} className="btn btn-secondary ms-1">
+              <Link to={`/documents`} className="btn btn-outline-secondary ms-1">
                 Voltar
               </Link>
             </div>
@@ -70,7 +70,7 @@ function DocumentDetalhesPage() {
             <div className="row mb-3">
               <div className="col">
                 <div className="fw-bold">Título:</div>
-                <p className="text-muted">{document.titulo}</p>
+                <p className="text-muted">{form.titulo}</p>
               </div>
             </div>
 
@@ -78,7 +78,7 @@ function DocumentDetalhesPage() {
               <div className="col">
                 <div className="fw-bold">Órgão:</div>
                 <p className="text-muted">
-                  {document.orgao ? document.orgao : "-"}
+                  {form.orgao ? form.orgao : "-"}
                 </p>
               </div>
             </div>
@@ -86,28 +86,28 @@ function DocumentDetalhesPage() {
             <div className="row mb-3">
               <div className="col">
                 <div className="fw-bold">Tipo:</div>
-                <p className="text-muted"> {DOC_TYPES[document.tipo]}</p>
+                <p className="text-muted"> {DOC_TYPES[form.tipo]}</p>
               </div>
             </div>
 
             <div className="row mb-3">
               <div className="col">
                 <div className="fw-bold">URL do PDF:</div>
-                <a href={document.pdf} target='_blank' rel="noreferrer">{document.pdf}</a>
+                <a href={form.pdf} target='_blank' rel="noreferrer">{form.pdf}</a>
               </div>
             </div>
 
             <div className="row mb-3">
               <div className="col">
                 <div className="fw-bold">Data da publicação:</div>
-                <p className="text-muted">{document.dataPublicacao ? formatDateBR(document.dataPublicacao) : '-'}</p>
+                <p className="text-muted">{form.dataPublicacao ? formatDateBR(form.dataPublicacao) : '-'}</p>
               </div>
             </div>
 
             <div className="row mb-3">
               <div className="col">
-                <div className="fw-bold">Anotações:</div>
-                <p className="text-muted"> {document.anotacoes}</p>
+                <div className="fw-bold">Observações:</div>
+                <p className="text-muted"> {form.anotacoes}</p>
               </div>
             </div>
 

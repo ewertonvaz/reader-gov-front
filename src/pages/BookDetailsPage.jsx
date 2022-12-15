@@ -51,18 +51,18 @@ function DetalhesPage() {
           </div>
 
           <div className="text-center">
-            <Link to={`/books/${book._id}/edit`} className="btn btn-secondary">
+            <Link to={`/books/${book._id}/edit`} className="btn btn-outline-secondary">
               Editar
             </Link>
             <Link
               state={{ livro: book }}
-              to={`/books/leitura/${book._id}`}
-              className={`btn btn-secondary ms-1 ${book.caminho ? '' : 'disabled'}`}
+              to={`/leitura/book/${book._id}`}
+              className={`btn btn-outline-secondary ms-1 ${book.caminho ? '' : 'disabled'}`}
             >
               Ler
             </Link>
 
-            <Link to={`/books`} className="btn btn-secondary ms-1">
+            <Link to={`/books`} className="btn btn-outline-secondary ms-1">
               Voltar
             </Link>
           </div>
@@ -155,7 +155,7 @@ function DetalhesPage() {
 
           <div className="row mb-3">
             <div className="col pt-2">
-              <div className="fw-bold mb-2">Anotações:</div>
+              <div className="fw-bold mb-2">Observações:</div>
               <div className="text-muted">{book.anotacoes}</div>
             </div>
           </div>

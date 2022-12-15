@@ -153,7 +153,7 @@ function DocumentEditarPage() {
             </div>
             <div className="d-flex justify-content-around">
               <Button
-                variant="secondary"
+                variant="outline-success"
                 size="sm"
                 onClick={handleSubmit}
               >
@@ -161,14 +161,14 @@ function DocumentEditarPage() {
               </Button>{' '}
 
               <Button
-                className="ms-1"
+                className="ms-1 me-1"
                 size="sm"
-                variant="secondary" onClick={handleShowUpload}>
+                variant="outline-secondary" onClick={handleShowUpload}>
                 Upload
               </Button>{' '}
 
               <Link to={`/documents`}
-                className="btn btn-secondary btn-sm ms-1"
+                className="btn btn-outline-secondary"
               >
                 Voltar
               </Link>{' '}
@@ -297,7 +297,7 @@ function DocumentEditarPage() {
                 <div className="col-12">
                   <FloatingLabel
                     controlId="floatingTextarea2"
-                    label="Anotações"
+                    label="Observações"
                   >
                     <Form.Control
                       as="textarea"
@@ -305,7 +305,7 @@ function DocumentEditarPage() {
                       value={form.anotacoes}
                       onChange={handleChange}
                       placeholder="Leave a comment here"
-                      style={{ height: "130px" }}
+                      style={{ height: "100px" }}
                     />
                   </FloatingLabel>
                 </div>
