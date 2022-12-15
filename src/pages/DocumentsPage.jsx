@@ -190,13 +190,10 @@ function DocumentsPage() {
                     </div>
                     <div className="col">
                         <div className="form-inline">
-                            <div className="text-end">
-                                <Link className="btn btn-outline-secondary btn-sm" to="/documents/new">Novo documento
-                                </Link> 
-                                {filter.docType === DOC_TYPES.SEI && (
-                                    <SeiLoginModel />
-                                )}
-
+                            <div className="d-flex justify-content-end">
+                                <Link className="btn btn-outline-secondary btn-sm ms-3" to="/documents/new">Novo documento
+                                </Link>
+                                {filter.docType === DOC_TYPES.SEI && (<SeiLoginModel />)}
                             </div>
                         </div>
                     </div>
