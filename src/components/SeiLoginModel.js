@@ -41,7 +41,7 @@ function SeiLoginModel() {
 
   return (
     <div>
-      <Link onClick={handleShow} className="btn btn-outline-secondary">
+      <Link onClick={handleShow} className="btn btn-outline-primary btn-sm ms-1">
         Sei!
       </Link>
 
@@ -100,7 +100,7 @@ function SeiLoginModel() {
                   <option></option>
                   <option value="TJDFT">TJDFT</option>
                   <option value="TRF1">TRF1</option>
-                  <option value="MRE">MRE</option>
+                  <option value="MRE">MDR</option>
                 </Form.Select>
               </span>
             </div>
