@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import ItemCard from '../components/ItemCard';
 import Paginator from '../components/Paginator';
 import Spinner from '../components/shared/Spinner';
+import SeiLoginModel from '../components/SeiLoginModel'
 
 
 const DOC_TYPES = {
@@ -191,10 +192,9 @@ function DocumentsPage() {
                         <div className="form-inline">
                             <div className="text-end">
                                 <Link className="btn btn-outline-secondary btn-sm" to="/documents/new">Novo documento
-                                </Link>
+                                </Link> 
                                 {filter.docType === DOC_TYPES.SEI && (
-                                    <Link className="btn btn-outline-primary btn-sm ms-3" to="/login-sei">Login SEI
-                                    </Link>
+                                    <SeiLoginModel />
                                 )}
 
                             </div>
