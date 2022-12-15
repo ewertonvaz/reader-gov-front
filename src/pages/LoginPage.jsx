@@ -105,7 +105,7 @@ function LoginPage() {
               label="Check me out"
             /> */}
               </Form.Group>
-              <small>Ainda não possui cadastro? Faça <Link to='/signup' style={{textDecoration:"none", color:"black"}}><strong>aqui</strong></Link></small><br/>
+              <small>Não tem conta? <Link to='/signup' style={{textDecoration:"none", color:"black"}}><strong>Cadastre-se!</strong></Link></small><br/>
               <div className="row">
                 <div className="col d-flex ">
                 
