@@ -70,7 +70,7 @@ function ProfilePage() {
   function handleShowUpload(){
     setShowUpload(!showUpload);
     if (!showUpload) {
-
+      return
     }
   }
 
@@ -85,6 +85,7 @@ function ProfilePage() {
             const request = await api.put("/cn/upload",formData);
             //Obtem o nome do arquivo / URL
             setUser({ ...user, profilePic: request.data.filename });
+            setForm({ ...user, profilePic: request.data.filename });
             fileInput.value = null;
             setShowUpload(!showUpload);
             toast.success("O upload do arquivo foi bem sucedido!")
@@ -111,7 +112,7 @@ function ProfilePage() {
   async function handleSubmit(e){
     e.preventDefault();
     setEdit(false)
-   
+   console.log(form)
     try {
       await api.put("/user/edit", form);
       toast.success("Alterações realizadas com sucesso")
@@ -130,6 +131,7 @@ function ProfilePage() {
         <Container>
         <Row>
           <Col className="col-3">
+          <Form.Group>
             <img
               variant="top"
               style={{
@@ -140,15 +142,20 @@ function ProfilePage() {
               }}
               src={user.profilePic ? user.profilePic : image}
               alt="imagem"
+              onChange={handleChange}
             />
+            </Form.Group>
             
             <Form.Group className="mb-3">
               <Form.Label onClick={handleShowUpload} style={{cursor : "pointer"}}>Editar Foto</Form.Label>
               { showUpload &&
                   <>
-                  <Form.Control id="fileToUpload" type="file" className="mb-2"/>
+                  <Form.Control id="fileToUpload" type="file" className="mb-2" disabled = {edit === true? false : true}/>
+                  <div className="buttons">
                   <Button onClick={handleUpload}>Upload</Button>
                   <Button variant="danger" onClick={cancelUpload}>Cancelar</Button>
+                  </div>
+                  
                   </>
                 }            
               </Form.Group>
