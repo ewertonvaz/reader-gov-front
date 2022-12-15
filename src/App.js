@@ -50,12 +50,10 @@ function App() {
             <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />
             <Route path="/edit-user/:idUser" element={<ProtectRoute Component={EditUserByAdminPage}/>}/>
             <Route path="/login-sei" element={<SeiLoginPage/>}/>
+            <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
 
             {/* Todas as rotas aqui dentro estão COM container */}
             <Route element={<> <div className='container py-3'><Outlet /></div> </>}>
-
-              <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
-
               <Route path="/userlist" element={<ProtectRoute Component={UserListPage} />}></Route>
 
               <Route path="/books" element={<ProtectRoute Component={BooksPage} />}></Route>
