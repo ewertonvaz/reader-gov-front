@@ -40,7 +40,7 @@ function App() {
         <Routes>
 
           {/* Estast rotas ficarão SEM a NavBar padrão */}
-          <Route path="/signup" element={<SignUpPage />}></Route>
+          <Route path="/signup" element={<SignUpPage /> }></Route>
 
           {/* Todas as rotas aqui dentro estão COM a NavBar */}
           <Route element={<> <NavBar /> <Outlet /> </>}>
