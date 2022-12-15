@@ -2,7 +2,7 @@
 
 ## Aplicativo para centralização e gerenciamento de leitura de documentos públicos
 
-![Tela inicial do aplicativo](/docs/images/home-page.png)
+![Tela inicial do aplicativo](/docs/home-page.png)
 
 ## PROJETO 3
 
