@@ -59,7 +59,6 @@ function Leitura() {
 
         }
 
-
       }
       else {
         throw new Error('Tipo de conteúdo inválido');

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import { AuthContext } from "../contexts/authContext";
@@ -105,7 +105,7 @@ function LoginPage() {
               label="Check me out"
             /> */}
               </Form.Group>
-              <small>Ainda não possui uma Conta? Faça já o seu <Link to='/signup' style={{textDecoration:"none", color:"black"}}><strong>Cadastro</strong></Link></small><br/>
+              <small>Ainda não possui cadastro? Faça <Link to='/signup' style={{textDecoration:"none", color:"black"}}><strong>aqui</strong></Link></small><br/>
               <div className="row">
                 <div className="col d-flex ">
                 
