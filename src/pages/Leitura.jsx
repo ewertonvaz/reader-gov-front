@@ -1,35 +1,82 @@
-import BookPdf from "../components/BookPdf";
-// import BookEpub from "../components/BookEpub";
-//import { useState } from "react";
-import { useLocation  } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import api from "../api/api";
+import PdfReader from "../components/PdfReader";
 
 function Leitura() {
-  //const [showLeitor, setShowLeitor] = useState(false);
-  const parametro = useLocation();
-  const { livro } = parametro.state;
-  //console.log(livro.ultPagLida);
-  return (
-    <div className="livro-lista">
-      {livro.tipo.toLowerCase() === "pdf" && (
-        <BookPdf
-          tipo={livro.tipo}
-          ultPagLida={livro.ultPagLida}
-          caminho={livro.caminho}
-          id={livro._id}
-        />
-      )}
-      {livro.tipo.toLowerCase() === "epub" &&
-        ( <h2>Desculpe leitor de e-Pub indisponível temporariamente!</h2>)
-        // (
-        //   <BookEpub
-        //     tipo={livro.tipo}
-        //     ultPagLida={livro.ultPagLida}
-        //     caminho={livro.caminho}
-        //     id={livro._id}
-        //   />
-        // )
+
+  const { tipoConteudo, idConteudo } = useParams();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [config, setConfig] = useState({});
+
+
+  useEffect(() => {
+
+    (async () => {
+
+      let configNew;
+      
+      if (tipoConteudo === 'book') {
+        
+        const res = await api.get('/books/' + idConteudo);
+        
+        configNew = {
+          id: res.data._id,
+          urlArquivo: res.data.caminho,
+          ultPagLida: res.data.ultPagLida,
+          tipoConteudoApiNotes: 'book'
+        };
+        
+        
       }
-    </div>
+      else if (tipoConteudo === 'document') {
+        
+        const res = await api.get('/documents/get-one/' + idConteudo);
+        
+        configNew = {
+          id: res.data._id,
+          urlArquivo: res.data.pdf,
+          ultPagLida: 1,
+          tipoConteudoApiNotes: 'document'
+        };
+        
+      }
+      else {        
+        throw new Error('Tipo de conteúdo inválido');
+      }
+
+      console.log({configNew});
+
+      setConfig(configNew);
+
+      setIsLoading(false);
+
+    })();
+
+
+
+  }, []);
+
+  return (
+
+    <>
+      {!isLoading && (
+
+        <div className="pdf-reader-container">
+          <PdfReader
+            id={config.id}
+            urlArquivo={config.urlArquivo}
+            ultPagLida={config.ultPagLida}
+            tipoConteudoApiNotes={config.tipoConteudoApiNotes}
+          />
+        </div>
+
+      )}
+
+    </>
+
   );
 }
 

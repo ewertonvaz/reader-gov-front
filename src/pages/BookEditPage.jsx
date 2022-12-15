@@ -148,15 +148,15 @@ function EditarPage() {
 
             <div className="buttons">
               <Button
-                variant="secondary"
+                variant="outline-success"
                 onClick={handleSubmit}
               >
                 Salvar
               </Button>{" "}
-              <Link to={`/books`} className="btn btn-secondary">
+              <Link to={`/books`} className="btn btn-outline-secondary">
                 Voltar
               </Link>
-              <Button variant="secondary" onClick={handleShowUpload}>
+              <Button variant="outline-secondary" onClick={handleShowUpload}>
                 Upload
               </Button>
               <ConfirmaExclusao config={{
@@ -389,7 +389,7 @@ function EditarPage() {
               <div className="mb-3">
                 <FloatingLabel
                   controlId="floatingTextarea2"
-                  label="Comentários"
+                  label="Observações"
                 >
                   <Form.Control
                     as="textarea"

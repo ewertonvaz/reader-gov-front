@@ -28,6 +28,7 @@ import UserListPage from './pages/UserListPage';
 import SeiLoginPage from './pages/SeiLoginPage';
 import EditUserByAdminPage from   './pages/EditUserByAdminPage';
 
+
 function App() {
 
   return (
@@ -47,9 +48,9 @@ function App() {
             {/* Estast rotas ficarão SEM container */}
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/profile" element={<ProtectRoute Component={ProfilePage} />} />
-            <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} />} />
             <Route path="/edit-user/:idUser" element={<ProtectRoute Component={EditUserByAdminPage}/>}/>
             <Route path="/login-sei" element={<SeiLoginPage/>}/>
+            <Route path="/leitura/:tipoConteudo/:idConteudo" element={<ProtectRoute Component={Leitura} />} />
             <Route path="/" element={<ProtectRoute Component={HomePage} />}></Route>
 
             {/* Todas as rotas aqui dentro estão COM container */}
@@ -61,16 +62,15 @@ function App() {
               <Route path="/books/:bookID" element={<ProtectRoute Component={BookDetailsPage} />}></Route>
               <Route path="/books/:bookID/edit" element={<ProtectRoute Component={BookEditPage} />}></Route>
               <Route path="/books/google" element={<ProtectRoute Component={GoogleBooksPage} />} />
-              <Route path="/books/leitura/:livroID" element={<ProtectRoute Component={Leitura} hideContainer={true} />} />
 
               <Route path="/documents" element={<ProtectRoute Component={DocumentsPage} />}></Route>
               <Route path="/documents/new" element={<ProtectRoute Component={DocumentNewPage} />}></Route>
               <Route path="/documents/:documentID" element={<ProtectRoute Component={DocumentDetalhesPage} />}></Route>
               <Route path="/documents/:documentID/edit" element={<ProtectRoute Component={DocumentEditPage} />}></Route>
-              <Route path="/documents/leitura/:documentID" element={<ProtectRoute Component={Leitura} />}></Route>
               <Route path="/profile" element={<ProtectRoute Component={ProfilePage} hideContainer={true}/>} />
               <Route path="/server-env" element={<ProtectRoute Component={ServerEnvPage} />} />
               <Route path="/upload" element={<ProtectRoute Componente={UploadPage} />}></Route>
+
               <Route path="*" element={<ErrorPage />}></Route>
             </Route>
 

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import "./../components/BookPdf.css";
-import pdf from "./../assets/pdfs/auto.pdf";
-import { Card, Offcanvas, Button  } from "react-bootstrap";
+import "./PdfReader.css";
+import pdf from "../assets/pdfs/auto.pdf";
+import { Card, Offcanvas  } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import api from "../api/api.js";
 import { formatLocaleBR } from "../util/date.util.js";
 import NoteModalForm from "./NoteModalForm";
 
+
+
 /*ESSA VARIÁVEL DE URL USA UM OUTRO LINK ANTES PARA
 EVITAR UM ERRO DE CORS */
 //const urlCors = `https://cors-anywhere.herokuapp.com/`;
-function BookPdf({ id, caminho, ultPagLida }) {
+function PdfReader({ id, urlArquivo, ultPagLida, tipoConteudoApiNotes }) {
   /* PARA USAR A BIBLIOTECA PRECISA DE UM pdf.worker.js,
   IMPORTARMOS ELE DE OUTRO SITE PARA EVITAR PROBLEMAS NA BUILD E DEPLOY */
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -28,13 +30,12 @@ function BookPdf({ id, caminho, ultPagLida }) {
   const handleCloseNotes = () => setShowNotes(false);
   const handleShowNotes = () => setShowNotes(true);
 
-  //const host = `${caminho}${id}.pdf`;
-  const host = `${caminho}`;
   const defaultNote = {
     titulo: "",
     texto: "",
     page: pageNumber ? pageNumber : 1,
   };
+
   document.addEventListener("contextmenu", (event) => {
     event.preventDefault();
   });
@@ -48,7 +49,7 @@ function BookPdf({ id, caminho, ultPagLida }) {
   useEffect(() => {
     async function fetchNotes() {
       try {
-        const response = await api.get(`/notes/book/${id}`);
+        const response = await api.get(`/notes/${tipoConteudoApiNotes}/${id}`);
         setNotes(response.data);
       } catch (error) {
         console.log(error);
@@ -71,7 +72,7 @@ function BookPdf({ id, caminho, ultPagLida }) {
 
   async function handleDeleteNote(id){
     try {
-      const response = await api.delete(`/notes/book/${id}`);
+      const response = await api.delete(`/notes/${tipoConteudoApiNotes}/${id}`);
       toast.success("Anotação removida com sucesso!");
       setReload(!reload);
     } catch (error) {
@@ -88,8 +89,8 @@ function BookPdf({ id, caminho, ultPagLida }) {
 
   useEffect(() => {
     //caminho.includes("http") ? setUrl(urlCors + host) : setUrl(pdf);
-    caminho.includes("http") ? setUrl(host) : setUrl(pdf);
-  }, [host]);
+    urlArquivo.includes("http") ? setUrl(urlArquivo) : setUrl(pdf);
+  }, [urlArquivo]);
 
   /*Quando o documento é carregado com sucesso*/
   function onDocumentLoadSuccess({ numPages, options }) {
@@ -108,6 +109,8 @@ function BookPdf({ id, caminho, ultPagLida }) {
   function proxPagina() {
     mudarPagina(1);
   }
+
+
   return (
     <>
       <div className="main">
@@ -196,4 +199,4 @@ function BookPdf({ id, caminho, ultPagLida }) {
     </>
   );
 }
-export default BookPdf;
+export default PdfReader;
