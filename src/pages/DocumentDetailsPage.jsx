@@ -24,6 +24,10 @@ function DocumentDetalhesPage() {
 
       const documentApi = { ...response.data };
 
+      if (!documentApi.pdf.toLowerCase().startsWith('http')) {
+        documentApi.pdf = 'http://' + documentApi.pdf;
+      }
+
       setForm(documentApi);
 
       setIsLoading(false);
@@ -53,7 +57,7 @@ function DocumentDetalhesPage() {
                 Editar
               </Link>
               <Link
-                state={{form }}
+                state={{ form }}
                 to={`/leitura/document/${form._id}`}
                 className={`btn btn-outline-secondary ms-1 ${form.pdf ? '' : 'disabled'}`}
               >
