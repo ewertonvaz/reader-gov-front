@@ -93,7 +93,7 @@ function CadastroPage() {
             <div className="buttons">
               <Form.Group>
                 <Button
-                  variant="secondary"
+                  variant="outline-success"
                   disabled={form.titulo === "" ? true : false}
                   onClick={handleSubmit}
                 >
@@ -101,8 +101,8 @@ function CadastroPage() {
                 </Button>{" "}
               </Form.Group>
               <Form.Group>
-                <Link to="/books">
-                  <Button variant="secondary">Voltar</Button>{" "}
+                <Link to={`/books`}>
+                  <Button variant="outline-secondary">Voltar</Button>{" "}
                 </Link>
               </Form.Group>
             </div>

@@ -188,12 +188,17 @@ function DocumentsPage() {
                         </form>
                     </div>
                     <div className="col">
-                        <form className="form-inline">
+                        <div className="form-inline">
                             <div className="text-end">
                                 <Link className="btn btn-outline-secondary btn-sm" to="/documents/new">Novo documento
                                 </Link>
+                                {filter.docType === DOC_TYPES.SEI && (
+                                    <Link className="btn btn-outline-primary btn-sm ms-3" to="/login-sei">Login SEI
+                                    </Link>
+                                )}
+
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -231,7 +236,7 @@ function DocumentsPage() {
                                     })}
                                 </div>
 
-                                <div className="my-5 d-flex justify-content-center">
+                                <div className="mt-5">
                                     {getPaginatorContent()}
                                 </div>
 
