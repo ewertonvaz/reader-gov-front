@@ -40,8 +40,21 @@ function NavBar() {
                 <Link className="nav-link" to="/documents">
                   Documentos
                 </Link>
+                {loggedInUser.user.role === 'ADMIN' && (
+                  <>
+                    <NavDropdown title="Admin" id="basic-nav-dropdown">
+
+                      <NavLink as={NavLink} to='/userlist' className='dropdown-item'>Usuários</NavLink>
+
+                    </NavDropdown>
+                  </>
+                )}
+
               </>
             )}
+
+
+
 
           </Nav>
           <Nav>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../api/api";
 import PdfReader from "../components/PdfReader";
+import Spinner from '../components/shared/Spinner';
 
 function Leitura() {
 
@@ -11,43 +12,58 @@ function Leitura() {
 
   const [config, setConfig] = useState({});
 
+  const [showInvalidFileType, setShowInvalidFileType] = useState(false);
+
 
   useEffect(() => {
 
     (async () => {
 
       let configNew;
-      
+
       if (tipoConteudo === 'book') {
-        
+
         const res = await api.get('/books/' + idConteudo);
-        
-        configNew = {
-          id: res.data._id,
-          urlArquivo: res.data.caminho,
-          ultPagLida: res.data.ultPagLida,
-          tipoConteudoApiNotes: 'book'
-        };
-        
-        
+
+        if (res.data.tipo.toLowerCase() !== 'pdf') {
+          setShowInvalidFileType(true);
+        }
+        else {
+
+          configNew = {
+            id: res.data._id,
+            urlArquivo: res.data.caminho,
+            ultPagLida: res.data.ultPagLida || 1,
+            tipoConteudoApiNotes: 'book'
+          };
+
+        }
+
+
       }
       else if (tipoConteudo === 'document') {
-        
+
         const res = await api.get('/documents/get-one/' + idConteudo);
-        
-        configNew = {
-          id: res.data._id,
-          urlArquivo: res.data.pdf,
-          ultPagLida: 1,
-          tipoConteudoApiNotes: 'document'
-        };
-        
+
+        if (!res.data.pdf || res.data.pdf.substring(res.data.pdf.lastIndexOf('.')).toLowerCase() !== '.pdf') {
+          setShowInvalidFileType(true);
+        }
+        else {
+
+          configNew = {
+            id: res.data._id,
+            urlArquivo: res.data.pdf,
+            ultPagLida: 1,
+            tipoConteudoApiNotes: 'document'
+          };
+
+        }
+
+
       }
-      else {        
+      else {
         throw new Error('Tipo de conteúdo inválido');
       }
-
-      console.log({configNew});
 
       setConfig(configNew);
 
@@ -62,7 +78,15 @@ function Leitura() {
   return (
 
     <>
-      {!isLoading && (
+
+      {isLoading && (
+        <div className='mt-5 d-flex justify-content-center'>
+          <Spinner color="#3955BD" width="48px" />
+        </div>
+      )}
+
+
+      {!isLoading && !showInvalidFileType && (
 
         <div className="pdf-reader-container">
           <PdfReader
@@ -73,6 +97,15 @@ function Leitura() {
           />
         </div>
 
+      )}
+
+      {showInvalidFileType && (
+        <div className="container mt-5">
+          <div className="alert alert-warning" role="alert">
+          <h4 className="alert-heading">Não foi possível exibir o conteúdo</h4>
+            Tipo de arquivo inválido.
+          </div>
+        </div>
       )}
 
     </>

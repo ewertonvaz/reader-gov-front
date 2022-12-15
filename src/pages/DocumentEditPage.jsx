@@ -167,7 +167,7 @@ function DocumentEditarPage() {
                 Upload
               </Button>{' '}
 
-              <Link to={`/documents`}
+              <Link to={`/documents/${documentID}`}
                 className="btn btn-outline-secondary"
               >
                 Voltar

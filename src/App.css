@@ -186,8 +186,7 @@ a {
   display: flex;
   gap: 5px;
   justify-content: center;
-  margin-top: 10px;
-  margin-right: 20px;
+  margin-top: 20px;
 }
 
 .dataLeitura {
